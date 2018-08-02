@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import Router from './routes.js';
+import Router from './routes/mainRoutes.js';
 import {Provider} from 'react-redux';
 import store from './store.js';
-import Login from './components/login/Login.js';
+import {BrowserRouter} from "react-router-dom"
+import './index.css';
 
-ReactDOM.render(<Provider store={store}>
+
+ReactDOM.render(( <Provider store={store}>
+              <BrowserRouter>
                   <Router />
-               </Provider>,
-              document.getElementById('root'));
+              </BrowserRouter>
+               </Provider>
+             ),document.getElementById('root'));

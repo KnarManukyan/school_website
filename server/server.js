@@ -2,15 +2,12 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const app = express();
+const router = require('./routes/index.js')
+require('dotenv').config();
 
-app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', ['*']);
-    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.append('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-});
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 app.use(cors());
 
-app.listen(3000, () => console.log('server is connected'));
+app.use('/api', router);
+app.listen(process.env.SERVER_PORT, () => console.log('server is connected'));

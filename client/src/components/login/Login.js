@@ -2,61 +2,78 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import '../../index.css';
 import './login.css'
-import image from './bg-01.jpg';
-import {setLoginWaiting, setLoginSuccess, setLoginFailure, setEmail, setPassword, submit, enableButton} from '../../actions/action.js'
-import {Provider} from 'react-redux';
-import store from '../../store.js'
+import image from '../../assets/kidswalking.jpg';
+import {setEmail, setPassword, ChangeTheStateOfSubmitButton, fetchUser, setLoginFailure} from '../../actions'
 import validator from 'validator';
 
 
 
 class Login extends Component {
+  onSubmit = (e) => {
+      e.preventDefault();
+      this.props.fetchUser(this.props.email, this.props.password);
+  }
+
+  componentDidUpdate = () => {
+    const email = this.props.email;
+    const password = this.props.password;
+    if(password && email){
+      if(!validator.isEmail(email)){
+        this.props.setLoginFailure('The email is not valid');
+        this.props.ChangeTheStateOfSubmitButton(true);
+      } else if(validator.isEmpty(email)){
+        this.props.setLoginFailure('The email is required');
+        this.props.ChangeTheStateOfSubmitButton(true);
+      } else if(validator.isEmpty(password)){
+        this.props.setLoginFailure('The password is required');
+        this.props.ChangeTheStateOfSubmitButton(true);
+      } else if(!validator.isLength(password, { min: 6})){
+        this.props.setLoginFailure('The length of password should be longer than 6 characters');
+        this.props.ChangeTheStateOfSubmitButton(true);
+      } else {
+        this.props.ChangeTheStateOfSubmitButton(false);
+        this.props.setLoginFailure(null);
+      }
+    }
+ }
 
   render() {
     return (
-      <div class="limiter">
-    		<div class="container-login100">
-    			<div class="wrap-login100">
-    				<form class="login100-form validate-form" onSubmit={this.onSubmit}>
-    					<span class="login100-form-title p-b-43">
+      <div className="limiter">
+    		<div className="container-login100">
+    			<div className="wrap-login100">
+    				<form className="login100-form validate-form" onSubmit={this.onSubmit}>
+    					<span className="login100-form-title p-b-43">
     						Login to continue
     					</span>
-              <div class="required_message">
-                <h5 class="required_text">email and password are required!</h5>
+              <div className="required_message">
               </div>
-    					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-    						<input class="input100" type="text" name="email" required
+    					<div className="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+    						<input className="input100" type="text" name="email" required
                        onChange={result => this.props.setEmail(result.target.value)}/>
-    						<span class="focus-input100"></span>
-    						<span class="label-input100">Email</span>
+    						<span className="focus-input100"></span>
+    						<span className="label-input100">Email</span>
     					</div>
-    					<div class="wrap-input100 validate-input" data-validate="Password is required">
-    						<input class="input100" type="password" name="pass" required
+    					<div className="wrap-input100 validate-input" data-validate="Password is required">
+    						<input className="input100" type="password" name="pass" required
                        onChange={result => this.props.setPassword(result.target.value)} />
-    						<span class="focus-input100"></span>
-    						<span class="label-input100">Password</span>
+    						<span className="focus-input100"></span>
+    						<span className="label-input100">Password</span>
     					</div>
-    					<div class="container-login100-form-btn">
-    						<button  type="submit" class="login100-form-btn">
+    					<div className="container-login100-form-btn">
+    						<button  type="submit" className="login100-form-btn" disabled={(this.props.buttonIsDisabled === undefined ? true : this.props.buttonIsDisabled)}>
     							Login
     						</button>
     					</div>
-    					<div class="login100-form-social flex-c-m">
-    						<a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-    							<i class="fa fa-facebook-f" aria-hidden="true"></i>
-    						</a>
-    						<a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-    							<i class="fa fa-twitter" aria-hidden="true"></i>
-    						</a>
-    					</div>
-              <div>
+              <div className = 'message'>
+                {this.props.message}
               </div>
-    				</form>
-    				<div class="login100-more" style={{backgroundImage: "url(" + image + ")"}}>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
+            </form>
+            <div className="login100-more" style={{backgroundImage: "url(" + image + ")"}}>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }
@@ -64,16 +81,14 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   return ({
-    email: state.email,
-    password: state.password,
+    email: state.loginReducer.email,
+    password: state.loginReducer.password,
+    submitted: state.loginReducer.submitted,
+    buttonIsDisabled: state.loginReducer.buttonIsDisabled,
+    message: state.loginReducer.message
   })
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setEmail: (email) => dispatch(setEmail(email)),
-    setPassword: (password) => dispatch(setPassword(password)),
-  };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
+export default connect(mapStateToProps, {setEmail, setPassword, ChangeTheStateOfSubmitButton, fetchUser, setLoginFailure})(Login);

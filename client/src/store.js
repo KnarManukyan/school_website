@@ -1,7 +1,5 @@
-import reducer from './reducers/reducer.js';
+import reducer from './reducers';
 import {createStore, applyMiddleware} from "redux"
-
-import logger from 'redux-logger';
-const store = createStore(reducer, {}, applyMiddleware(logger)
-);
+import thunk from 'redux-thunk';
+const store = createStore(reducer, {}, applyMiddleware(thunk));
 export default store;

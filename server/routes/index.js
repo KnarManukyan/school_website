@@ -1,8 +1,7 @@
 var express = require('express');
-var server = require('../server.js');
-var database = require('../repository/repository.js');
 var router = express.Router();
+const loginController = require('../controller/login.js');
 
-
+router.post('/login',loginController.login)
 
 module.exports = router;
