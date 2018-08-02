@@ -1,20 +1,14 @@
-import {LoginTypes} from './type.js';
 import Redux from 'redux';
-
-export function setLoginWaiting() {
+export function setEmail(email) {
   return {
-    type: "SET_LOGIN_WAITING",
-  };
+    type: "SET_EMAIL",
+    email
+  }
 }
 
-export function setLoginSuccess() {
+export function setPassword(password) {
   return {
-    type: "SET_LOGIN_SUCCESS",
-  };
-}
-
-export function setLoginError() {
-  return {
-    type: "SET_LOGIN_ERROR",
+    type: "SET_PASSWORD",
+    password
   }
 }

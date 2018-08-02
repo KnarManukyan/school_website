@@ -3,37 +3,16 @@ import {connect} from 'react-redux';
 import '../../index.css';
 import './login.css'
 import image from './bg-01.jpg';
-import {setLoginWaiting, setLoginSuccess, setLoginError} from '../../actions/action.js'
+import {setLoginWaiting, setLoginSuccess, setLoginFailure, setEmail, setPassword, submit, enableButton} from '../../actions/action.js'
+import {Provider} from 'react-redux';
+import store from '../../store.js'
+import validator from 'validator';
+
+
 
 class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: null,
-      password: null
-    }
-  }
-  onSubmit = (e)=> {
-      e.preventDefault();
-      let { email, password } = this.state;
-      this.login(email, password);
-      this.setState({
-            email: '',
-            password: ''
-          });
-  }
-  login = (email, password) => {
-    debugger;
-    this.props.setLoginWaiting();
-    (this.check(email, password) ? this.props.setLoginSuccess() : this.props.setLoginError());
-    alert(this.props.loginStatus);
-  }
-  check = (email, password) =>{
-    (email === 'admin@admin.com' && password === 'null' ? true : false);
-  }
 
   render() {
-    let {email, password} = this.state;
     return (
       <div class="limiter">
     		<div class="container-login100">
@@ -42,15 +21,18 @@ class Login extends Component {
     					<span class="login100-form-title p-b-43">
     						Login to continue
     					</span>
+              <div class="required_message">
+                <h5 class="required_text">email and password are required!</h5>
+              </div>
     					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
     						<input class="input100" type="text" name="email" required
-                       onChange={result => this.setState({email: result.target.value})}/>
+                       onChange={result => this.props.setEmail(result.target.value)}/>
     						<span class="focus-input100"></span>
     						<span class="label-input100">Email</span>
     					</div>
     					<div class="wrap-input100 validate-input" data-validate="Password is required">
     						<input class="input100" type="password" name="pass" required
-                       onChange={result => this.setState({password: result.target.value})} />
+                       onChange={result => this.props.setPassword(result.target.value)} />
     						<span class="focus-input100"></span>
     						<span class="label-input100">Password</span>
     					</div>
@@ -67,6 +49,8 @@ class Login extends Component {
     							<i class="fa fa-twitter" aria-hidden="true"></i>
     						</a>
     					</div>
+              <div>
+              </div>
     				</form>
     				<div class="login100-more" style={{backgroundImage: "url(" + image + ")"}}>
     				</div>
@@ -79,16 +63,16 @@ class Login extends Component {
 
 
 const mapStateToProps = (state) => {
-  return {
-    loginStatus: state.loginStatus
-  }
+  return ({
+    email: state.email,
+    password: state.password,
+  })
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setLoginWaiting: () => dispatch(setLoginWaiting()),
-    setLoginSuccess: () => dispatch(setLoginSuccess()),
-    setLoginError: () => dispatch(setLoginError()),
+    setEmail: (email) => dispatch(setEmail(email)),
+    setPassword: (password) => dispatch(setPassword(password)),
   };
 };
 

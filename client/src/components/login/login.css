@@ -1,5 +1,3 @@
-
-
 * {
 	margin: 0px;
 	padding: 0px;
@@ -113,6 +111,7 @@ iframe {
 
 /*==================================================================
 [ Text ]*/
+
 .txt1 {
   font-family: Montserrat-Regular;
   font-size: 13px;
@@ -573,4 +572,14 @@ input.input100 {
 .login100-form-social-item:hover {
   background: #333333;
   color: #fff;
+}
+
+
+
+.required_text{
+	color: #707070;
+}
+
+.required_text{
+	margin: 10px;
 }
