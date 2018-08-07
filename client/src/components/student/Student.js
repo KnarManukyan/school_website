@@ -35,12 +35,12 @@ class Student extends Component {
             <th>options</th>
           </tr>
           <tr className="input-data">
-            <td><input ref = 'input1' placeholder="Enter firstname" onChange={(evt) => {this.input.firstName = evt.target.value}}/></td>
-            <td><input ref = 'input2' placeholder="Enter lastname" onChange={(evt) => {this.input.lastName = evt.target.value}}/></td>
-            <td><input ref = 'input3'placeholder="Enter age" onChange={(evt) => {this.input.age = evt.target.value}}/></td>
-            <td><input ref = 'input4' placeholder="Enter gender" onChange={(evt) => {this.input.gender = evt.target.value}}/></td>
-            <td><input ref = 'input5' placeholder="Enter phone" onChange={(evt) => {this.input.phone = evt.target.value}}/></td>
-            <td><input ref = 'input6' placeholder="Enter email" onChange={(evt) => {this.input.email = evt.target.value}}/></td>
+            <td><input className = 'add-input' ref = 'input1' placeholder="Enter firstname" onChange={(evt) => {this.input.firstName = evt.target.value}}/></td>
+            <td><input className = 'add-input' ref = 'input2' placeholder="Enter lastname" onChange={(evt) => {this.input.lastName = evt.target.value}}/></td>
+            <td><input className = 'add-input' ref = 'input3'placeholder="Enter age" onChange={(evt) => {this.input.age = evt.target.value}}/></td>
+            <td><input className = 'add-input' ref = 'input4' placeholder="Enter gender" onChange={(evt) => {this.input.gender = evt.target.value}}/></td>
+            <td><input className = 'add-input' ref = 'input5' placeholder="Enter phone" onChange={(evt) => {this.input.phone = evt.target.value}}/></td>
+            <td><input className = 'add-input' ref = 'input6' placeholder="Enter email" onChange={(evt) => {this.input.email = evt.target.value}}/></td>
             <td><button className = 'add-button' type="submit" onClick={() => {
                                                       this.props.addStudent(this.input);
                                                       this.refs.input1.value = null;
