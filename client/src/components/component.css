@@ -2,8 +2,7 @@ table {
     margin-top: 50px;
     border-collapse: collapse;
     width: 100%;
-
-     border-spacing: 0;
+    border-spacing: 0px;
 }
 
 th, td {
@@ -17,21 +16,16 @@ th {
     color: white;
 }
 
-table.no-spacing {
-  border-spacing:0; /* Removes the cell spacing via CSS */
-  border-collapse: collapse;  /* Optional - if you don't want to have double border where cells touch */
-}
 .header {
   background: linear-gradient(to right, #96dae8, #53b369);
 }
-.input-data {
-  width:100%
-}
-input {
+
+input:not(.add-input) {
   font-style: oblique;
   background: #ededeb;
   height: 20px;
 }
+
 .modal {
   position: fixed;
   top: 0;

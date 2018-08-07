@@ -14,7 +14,7 @@ class Admin extends Component {
           <button className="log-out-button" onClick={this.props.logOut}> Log out </button>
         </header>
         <div>
-          <Student />
+          <Teacher />
         </div>
       </div>
     )
