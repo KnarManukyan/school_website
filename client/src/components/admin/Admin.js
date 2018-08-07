@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { logOut} from '../../actions';
-import Student from '../Student.js'
+import Student from '../student/Student.js'
+import Teacher from '../teacher/Teacher.js'
+import Class from '../class/Class.js'
 import './Admin.css';
 
 class Admin extends Component {

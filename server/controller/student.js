@@ -13,12 +13,10 @@ exports.getStudents = function(req,res){
         });
     }
     else{
-      console.log(results.length);
       const students = [];
       for(let i = 0; i<results.length; i++){
         students[i] = results[i].dataValues;
       }
-      console.log(students);
           res.send({
             "code":200,
             "students": students
@@ -57,7 +55,7 @@ exports.addStudent = function(req,res) {
 exports.deleteStudent = function(req,res) {
   Students.destroy({
       where: {
-        id: req.param.id
+        id: req.param('id')
      }
    }).then(() => {
     res.send({
@@ -82,17 +80,17 @@ exports.editStudent = function(req,res) {
     email: req.body.email
   }, {
     where: {
-      id: req.param.id
+      id: req.param('id')
     }
   }).then(() => {
     res.send({
       "code":200,
-      "message": `Student was deleted`
+      "message": `Student ${req.body.firstName} ${req.body.lastName} was edited`
     });
   }).catch(function(error){
     res.send({
       "code":400,
-      "message": "error occured while deleting students"
+      "message": "error occured while editing students"
     });
   });
 }

@@ -1,4 +1,3 @@
-import fetch from 'isomorphic-fetch';
 import {SET_EMAIL,SET_PASSWORD, LOGGED_FAILED, LOGOUT, ENABLE_OR_DISABLE_BUTTON} from './type.js';
 import {history} from '../history.js';
 
