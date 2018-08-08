@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Classes', {
@@ -9,10 +10,17 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      description: {
-        type: Sequelize.TEXT
+      teacherId: {
+        type: Sequelize.INTEGER,
+          references: {
+              model: 'Teachers',
+              key: 'id',
+          },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       createdAt: {
         allowNull: false,
@@ -21,10 +29,11 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
     });
   },
+
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Classes');
+      return queryInterface.dropTable('Classes');
   }
 };

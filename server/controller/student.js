@@ -38,7 +38,8 @@ exports.addStudent = function(req,res) {
     age: req.body.age,
     gender: req.body.gender,
     phone: req.body.phone,
-    email: req.body.email
+    email: req.body.email,
+    classId: req.body.classId
   }).then(() => {
     res.send({
       "code":200,
@@ -77,7 +78,8 @@ exports.editStudent = function(req,res) {
     age: req.body.age,
     gender: req.body.gender,
     phone: req.body.phone,
-    email: req.body.email
+    email: req.body.email,
+    classId: req.body.classId
   }, {
     where: {
       id: req.param('id')
