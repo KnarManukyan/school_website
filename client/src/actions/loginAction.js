@@ -1,37 +1,11 @@
-import {SET_EMAIL,SET_PASSWORD, LOGGED_FAILED, LOGOUT, ENABLE_OR_DISABLE_BUTTON} from './type.js';
+import {SET_EMAIL,SET_PASSWORD, LOGGIN_FAILED, ENABLE_OR_DISABLE_BUTTON} from './type.js';
 import {history} from '../history.js';
 
 
-export function setEmail(email) {
-  return {
-    type: SET_EMAIL,
-    email
-  }
-}
-
-export function setPassword(password) {
-  return {
-    type: SET_PASSWORD,
-    password
-  }
-}
-
-export function ChangeTheStateOfSubmitButton(boolean) {
-  return {
-    type: ENABLE_OR_DISABLE_BUTTON,
-    boolean
-  }
-}
 export function setLoginFailure(message) {
   return {
-    type: LOGGED_FAILED,
+    type: LOGGIN_FAILED,
     message
-  }
-}
-
-export function logOut() {
-  return {
-    type: LOGOUT,
   }
 }
 

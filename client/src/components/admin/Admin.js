@@ -1,28 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { logOut} from '../../actions';
-import Student from '../student/Student.js'
-import Teacher from '../teacher/Teacher.js'
-import Class from '../class/Class.js'
 import './Admin.css';
-
+import '../component.css';
+import image from '../../assets/motivationalQuote.jpg'
 class Admin extends Component {
   render() {
     return (
-      <div>
-        <header>
-          <button className="log-out-button" onClick={this.props.logOut}> Log out </button>
-        </header>
+      <div className = 'content'>
+       <h1 className = 'large-text'>Welcome to your school website</h1>
         <div>
-          <Teacher />
+        <img  src= {image} style = {{height: '590px', marginLeft: '25%'}}/>
         </div>
       </div>
     )
   }
 }
-
-function mapStateToProps(state) {
-    return {}
-}
-
-export default connect(mapStateToProps, {logOut})(Admin);
+export default Admin;

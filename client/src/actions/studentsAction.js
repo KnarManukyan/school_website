@@ -1,5 +1,5 @@
-import { SET_STUDENT_ARRAY, STARTING_EDITING, FINISH_EDITING , CHANGE_THE_STATE_OF_THE_MODAL, SET_THE_RAW_TO_BE_DELETED } from './type.js';
-
+import { SET_STUDENT_ARRAY } from './type.js';
+import {setAddedId} from './commonlyUsedActions'
 export function setStudentsArray(array) {
   return {
     type: SET_STUDENT_ARRAY,
@@ -33,7 +33,9 @@ export function deleteStudent(id) {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       }
-    }).then(() => {
+    }).then(response => {
+       return response.json();
+    }).then((result) => {
     return dispatch(getStudent())})
     .catch(error => { console.log('request failed', error); });
 }
@@ -55,7 +57,10 @@ export function addStudent(student) {
         'phone': student.phone,
         'email': student.email
       })
-    }).then(() => {
+    }).then(response => {
+       return response.json();
+    }).then((result) => {
+      dispatch(setAddedId(result.id));
     return dispatch(getStudent())})
     .catch(error => { console.log('request failed', error); });
 }
@@ -77,7 +82,6 @@ export function editStudent(input) {
         'phone': input.phone,
         'email': input.email,
       })
-    }).then(() => {
-    return dispatch(getStudent())})
+    })
     .catch(error => { console.log('request failed', error); });
 }
