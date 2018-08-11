@@ -1,4 +1,4 @@
-import { SET_TEACHER_ARRAY } from '../actions/type.js';
+import { SET_TEACHER_ARRAY, SET_ADDED_TEACHER_ID } from '../actions/type.js';
 
 const initialState = {
   teachers: []

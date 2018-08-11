@@ -1,9 +1,9 @@
 const express = require('express');
-const {Teachers} = require('../models/index.js');
+const models = require("../models");
 const sequelize = require('sequelize');
 
 exports.getTeachers = function(req,res){
-  Teachers.findAll()
+  models.Teacher.findAll()
   .then(function (teacher) {
          res.send(teacher);
 
@@ -13,13 +13,14 @@ exports.getTeachers = function(req,res){
 }
 
 exports.addTeacher = function(req,res) {
-  Teachers.create({
+  models.Teacher.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     phone: req.body.phone,
     email: req.body.email
-  }).then(() => {
+  }).then((teacher) => {
     res.send({
+      "id": teacher.dataValues.id,
       "code":200,
       "message": `Teacher ${req.body.firstName} ${req.body.lastName} was added`
     });
@@ -32,7 +33,7 @@ exports.addTeacher = function(req,res) {
 }
 
 exports.deleteTeacher = function(req,res) {
-  Teachers.destroy({
+  models.Teacher.destroy({
       where: {
         id: req.param('id')
      }
@@ -50,7 +51,7 @@ exports.deleteTeacher = function(req,res) {
 }
 
 exports.editTeacher = function(req,res) {
-  Teachers.update({
+  models.Teacher.update({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     phone: req.body.phone,

@@ -1,7 +1,7 @@
 import { SET_STUDENT_ARRAY } from '../actions/type.js';
 
 const initialState = {
-  students: []
+  students: null
 };
 
 

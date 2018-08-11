@@ -1,11 +1,14 @@
 const express = require('express');
-const {Users} = require('../models/index.js');
+const models = require("../models");
 const sequelize = require('sequelize');
-const token = require('./createToken.js')
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+require('dotenv').config();
+
 exports.login = function(req,res){
   var email= req.body.email;
   var password = req.body.password;
-  Users.findOne({where : {email: email}})
+  models.User.findOne({where : {email: email}})
   .then((results) => {
     if(results == null)
     {
@@ -15,11 +18,13 @@ exports.login = function(req,res){
     }
     else{
       if(Object.keys(results).length > 0)  {
-        if(results.password == password){
-          res.send({
-            "code":200,
-            "message":"successfully logged in",
-            "token": token
+        if(bcrypt.compareSync(password, results.password)){
+          jwt.sign({results}, process.env.SECRET_KEY,  { expiresIn: '1h' }, function(err, token) {
+            res.send({
+              "code":200,
+              "message":"successfully logged in",
+              "token": token
+            });
           });
         }
         else {
@@ -32,6 +37,7 @@ exports.login = function(req,res){
   })
   .catch(function(error){
     res.send({
+      "error": error,
       "failed":"error occured"
     });
   });

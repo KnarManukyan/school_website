@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import '../assets/css/App.css';
 import pic from '../assets/school.jpg';
 import {history} from '../history.js';
 

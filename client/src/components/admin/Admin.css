@@ -1,4 +1,5 @@
 .log-out-button  {
+  margin: 10px;
   float: right;
   margin-right: 50px;
 	display: inline-block;
@@ -28,6 +29,7 @@
 	top: 1px;
 }
 .log-out-button  {
+  margin-top: 10px;
   margin-right: 10px;
 	color: #d9eef7;
 	border: solid 1px #5968cf;

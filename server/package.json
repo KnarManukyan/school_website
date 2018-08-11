@@ -11,10 +11,9 @@
   "author": "Knarik Manukyan",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "bcrypt": "^2.0.1",
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
-    "crypto": "^1.0.1",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "isomorphic-fetch": "^2.2.1",
