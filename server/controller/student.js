@@ -1,38 +1,23 @@
 const express = require('express');
-const {Students} = require('../models/index.js');
+const models = require("../models");
 const sequelize = require('sequelize');
 
 exports.getStudents = function(req,res){
-  Students.findAll()
-  .then((results) => {
-    if(results == null)
+  models.Student.findAll(
     {
-      res.send({
-        "code":204,
-        "students":"no student"
-        });
-    }
-    else{
-      const students = [];
-      for(let i = 0; i<results.length; i++){
-        students[i] = results[i].dataValues;
-      }
-          res.send({
-            "code":200,
-            "students": students
-          });
-        }
-  })
-  .catch(function(error){
-    res.send({
-      "code":400,
-      "message":"error occured while getting students"
-    });
-  });
-}
+      include: ['Classes'],
+      attributes: ['id', 'firstName', 'lastName', 'age', 'gender', 'phone', 'email', 'classId' ]
+    })
+    .then(function(students) {
+          res.send(students)
+
+       }).error(function (err) {
+           console.log("Error:" + err);
+       });
+  }
 
 exports.addStudent = function(req,res) {
-  Students.create({
+  models.Student.create({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     age: req.body.age,
@@ -40,8 +25,9 @@ exports.addStudent = function(req,res) {
     phone: req.body.phone,
     email: req.body.email,
     classId: req.body.classId
-  }).then(() => {
+  }).then((student) => {
     res.send({
+      "id": student.dataValues.id,
       "code":200,
       "message": `Student ${req.body.firstName} ${req.body.lastName} was added`
     });
@@ -54,7 +40,7 @@ exports.addStudent = function(req,res) {
 }
 
 exports.deleteStudent = function(req,res) {
-  Students.destroy({
+  models.Student.destroy({
       where: {
         id: req.param('id')
      }
@@ -72,7 +58,7 @@ exports.deleteStudent = function(req,res) {
 }
 
 exports.editStudent = function(req,res) {
-  Students.update({
+  models.Student.update({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     age: req.body.age,

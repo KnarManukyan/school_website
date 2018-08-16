@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../../index.css';
-import './login.css'
-import image from '../../../assets/kidswalking.jpg';
+import './login.css';
+import image from './kidswalking.jpg';
 import validator from 'validator';
 
 class LoginForm extends Component {
@@ -86,7 +86,7 @@ class LoginForm extends Component {
               </div>
             </form>
             <div className="login100-more" style={{backgroundImage: "url(" + image + ")"}}>
-            </div>
+              </div>
           </div>
         </div>
       </div>

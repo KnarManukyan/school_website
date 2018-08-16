@@ -7,7 +7,9 @@ class TeachersListContainer extends Component {
   render() {
     return (
       <div>
-        <TeachersList getTeacher = {this.props.getTeacher} teachers = {this.props.teachers} deleteTeacher = {this.props.deleteTeacher}/>
+        <TeachersList getTeacher = {this.props.getTeacher}
+                      teachers = {this.props.teachers} 
+                      deleteTeacher = {this.props.deleteTeacher}/>
       </div>
     )
   }

@@ -1,4 +1,6 @@
-import { SET_TEACHER_ARRAY, STARTING_EDITING, FINISH_EDITING , CHANGE_THE_STATE_OF_THE_MODAL, SET_THE_RAW_TO_BE_DELETED, SET_ADDED_TEACHER_ID } from './type.js';
+import { SET_TEACHER_ARRAY } from './type.js';
+import {setAddedId} from './commonlyUsedActions';
+import {unitedFetch} from './fetch.js';
 
 export function setTeachersArray(array) {
   return {
@@ -7,84 +9,48 @@ export function setTeachersArray(array) {
   }
 }
 
-export function setAddedTeacherId(id) {
-  return {
-    type: SET_ADDED_TEACHER_ID,
-    id
-  }
-}
 
 export function getTeacher() {
   return dispatch =>
-    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/api/teachers`, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      }
-    })
+    dispatch(unitedFetch('GET','/teachers'))
     .then(response => {
-       return response.json();
-    }).then(response => {
-      console.log(response);
       dispatch(setTeachersArray(response));
-    }).catch(error => { console.log('request failed', error); });
+    })
 }
 
 export function deleteTeacher(id) {
-  const url = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/api/teacher/${id}`;
   return dispatch =>
-    fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      }
-    }).then(() => {
-    return dispatch(getTeacher())
-    }).catch(error => { console.log('request failed', error); });
+    dispatch(unitedFetch('DELETE',`/teacher/${id}`))
+    .then((result) => {
+    return dispatch(getTeacher())})
+    .catch(error => { console.log('request failed', error); });
 }
 
-export function addTeacher(student) {
-  const url = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/api/teacher`;
-  return dispatch =>
-    fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        'firstName': student.firstName,
-        'lastName': student.lastName,
-        'phone': student.phone,
-        'email': student.email
-      })
-    }).then(response => {
-       return response.json();
-    }).then((result) => {
-      console.log(result);
-      dispatch(setAddedTeacherId(result.id));
-    return dispatch(getTeacher())
-    }).catch(error => { console.log('request failed', error); });
+export function addTeacher(teacher, goToEdit) {
+  let body = {
+        'firstName': teacher.firstName,
+        'lastName': teacher.lastName,
+        'phone': teacher.phone,
+        'email': teacher.email
+      }
+      return dispatch =>
+        dispatch(unitedFetch('PUT',`/teacher`, body))
+        .then((result) => {
+          if(!goToEdit){
+            dispatch(setAddedId(result.id));
+          }
+        })
+        .catch(error => { console.log('request failed', error); });
 }
 
 export function editTeacher(input) {
-  const url = `http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/api/teacher/${input.id}`;
-  return dispatch =>
-    fetch(url, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
+  let body = {
         'firstName': input.firstName,
         'lastName': input.lastName,
         'phone': input.phone,
         'email': input.email,
-      })
-    }).then(() => {
-    return dispatch(getTeacher())
-    }).catch(error => { console.log('request failed', error); });
+      }
+      return dispatch =>
+        dispatch(unitedFetch('POST',`/teacher/${input.id}`, body))
+        .catch(error => { console.log('request failed', error); });
 }

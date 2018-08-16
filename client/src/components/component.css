@@ -1,9 +1,10 @@
 .content{
+  margin-top: 10px;
   margin-left: 75px;
 }
 
 .large-text{
-  font-family: times, Times New Roman, times-roman, georgia, serif;
+ font-family: times, Times New Roman, times-roman, georgia, serif;
  color: #444;
  margin: 0;
  padding: 0px 0px 6px 0px;
@@ -71,6 +72,23 @@ input:not(.add-input) {
 
 .modal-button{
   margin:  20px 20px 5px 20px;
+}
+
+.loader{
+  position: absolute;
+  margin-top: 12%;
+  margin-left: 43%;
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid gray;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 button:not(.icon-button) {

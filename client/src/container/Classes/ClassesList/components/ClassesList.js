@@ -20,7 +20,6 @@ class Class extends Component {
   handleDelete = () => {
     this.props.deleteClass(this.props.classes[this.state.rowToBeKilled].id);
     this.setState({isModalOpen: false})
-
   }
   render() {
     return (
@@ -34,16 +33,15 @@ class Class extends Component {
           <tbody>
           <tr className = "header">
             <th>name</th>
-            <th>teacherId</th>
+            <th>teacher</th>
             <th style = {{float: 'right', marginRight: '65px'}} >options</th>
           </tr>
-        {this.props.classes.map((item, index) => {
-          console.log(this.props.classes);
+        {this.props.classes ? this.props.classes.map((item, index) => {
           const editInput = this.props.classes[index];
             return (
                   <tr>
                       <td>{item.name}</td>
-                      <td>{item.teacherId}</td>
+                      <td>{(item.Teacher ? `${item.Teacher.firstName} ${item.Teacher.lastName}` : "n/a")}</td>
                       <td style = {{float: 'right', marginRight: '50px'}}>
                           <button className= 'icon-button' style = {{marginRight: '40px'}} onClick = {() => {this.setState({isModalOpen: true,
                                                                                               rowToBeKilled: index})}}>
@@ -55,7 +53,7 @@ class Class extends Component {
                       </td>
                   </tr>
             )
-        })}
+        }):  <div className="loader"></div>}
 
           </tbody>
         </table>

@@ -5,7 +5,6 @@ import {Provider} from 'react-redux';
 import store from './store.js';
 import {BrowserRouter} from "react-router-dom"
 import './index.css';
-import WelcomePage from './container/App.js'
 import Login from './container/Login/loginContainer.js';
 import {history} from './history.js';
 

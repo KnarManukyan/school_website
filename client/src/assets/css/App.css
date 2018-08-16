@@ -1,3 +1,7 @@
+.limiter {
+  all: initial;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -25,7 +29,6 @@
   background-repeat:no-repeat;
   background-size:contain;
   height: 651px;
-
 }
 
 .login-button  {

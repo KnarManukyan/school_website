@@ -39,18 +39,20 @@ class Student extends Component {
             <th>gender</th>
             <th>phone</th>
             <th>email</th>
+            <th>classId</th>
             <th style = {{float: 'right', marginRight: '65px'}} >options</th>
           </tr>
-        {this.props.students.map((item, index) => {
+        {(this.props.students ? this.props.students.map((item, index) => {
           const editInput = this.props.students[index];
             return (
-                  <tr>
+                  <tr key = {index}>
                       <td>{item.firstName}</td>
                       <td>{item.lastName}</td>
                       <td>{item.age}</td>
                       <td>{item.gender}</td>
                       <td>{item.phone}</td>
                       <td>{item.email}</td>
+                      <td>{(item.Classes ? item.Classes.name : "n/a")}</td>
                       <td style = {{float: 'right', marginRight: '50px'}}>
                           <button className= 'icon-button' style = {{marginRight: '40px'}} onClick = {() => {this.setState({isModalOpen: true,
                                                                                               rowToBeKilled: index})}}>
@@ -62,7 +64,7 @@ class Student extends Component {
                       </td>
                   </tr>
             )
-        })}
+        }) : <div className="loader"></div>)}
 
           </tbody>
         </table>

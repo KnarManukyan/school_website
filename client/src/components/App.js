@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, Switch, Redirect } from 'react-router-dom';
-import AddStudentContainer from './Students/AddStudent/AddStudentContainer.js';
-import './App.css';
+import '../assets/css/App.css';
 import pic from '../assets/school.jpg';
 import {history} from '../history.js';
 

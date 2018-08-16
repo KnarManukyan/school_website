@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import Modal from '../../../../components/modal.js';
 import {history} from '../../../../history.js';
+import { Icon } from 'react-icons-kit';
+import {pencil} from 'react-icons-kit/iconic/pencil'
+import {plusCircle} from 'react-icons-kit/feather/plusCircle'
+import {minus} from 'react-icons-kit/feather/minus'
+
 class Teacher extends Component {
   constructor(props){
     super(props);
@@ -23,7 +28,7 @@ class Teacher extends Component {
         <div className="student">
           <h1 className = 'large-text'> Teachers </h1>
         </div>
-        <button className = 'add-button' type="submit" onClick={() => {history.push(`/teachers/add`)}} style={{margin: '10px'}}>Add Teacher</button>
+        <button type="submit" onClick={() => {history.push(`/teachers/add`)}} style={{margin: '10px'}}> <Icon style = {{color: '#626262'}} size={25} icon={plusCircle} /></button>
         <div>
         <table>
           <tbody>
@@ -34,7 +39,7 @@ class Teacher extends Component {
             <th>email</th>
             <th style = {{float: 'right', marginRight: '65px'}} >options</th>
           </tr>
-        {this.props.teachers.map((item, index) => {
+        {this.props.teachers ? this.props.teachers.map((item, index) => {
           const editInput = this.props.teachers[index];
             return (
                   <tr>
@@ -42,17 +47,18 @@ class Teacher extends Component {
                       <td>{item.lastName}</td>
                       <td>{item.phone}</td>
                       <td>{item.email}</td>
-                      <td style = {{float: 'right', marginRight: '40px'}} ><button className = 'delete-button' onClick = {() => {this.setState({isModalOpen: true,
-                                                                                              rowToBeKilled: index})}}>
-                            Delete
+                      <td style = {{float: 'right', marginRight: '50px'}} >
+                          <button className = 'icon-button'  style = {{marginRight: '40px'}} onClick = {() => {this.setState({isModalOpen: true,
+                                                                                rowToBeKilled: index})}}>
+                          <Icon style={{ color: 'red' }} size={25} icon={minus} />
                           </button>
-                          <button className = 'edit-button' onClick = {() => {history.push(`/teachers/edit/${item.id}`)}}>
-                            Edit
+                          <button className = 'icon-button' onClick = {() => {history.push(`/teachers/edit/${item.id}`)}}>
+                            <Icon style={{border: 'none', color: 'gray'}} size={20} icon={pencil} />
                           </button>
                       </td>
                   </tr>
             )
-        })}
+        }):  <div className="loader"></div>}
 
           </tbody>
         </table>

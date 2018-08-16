@@ -5,7 +5,7 @@ const initialState = {
 };
 
 
-export default function studentsReducer(state = initialState, action){
+export default function commonlyUsedActionsReducer(state = initialState, action){
     switch (action.type) {
     case SET_ADDED_ID:{
       return{

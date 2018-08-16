@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getTeacher, addTeacher } from '../../../actions';
+import { getTeacher, addTeacher, resetAddedId } from '../../../actions';
 import  TeacherForm from '../components/TeacherForm.js'
 
-class TeachersListContainer extends Component {
+class AddTeacherContainer extends Component {
   componentDidMount(){
     this.props.getTeacher();
   }
   render() {
     return (
       <div>
-        <TeacherForm getTeacher = {this.props.getTeacher} onSubmit = {this.props.addTeacher} teachers = {this.props.teachers} buttonName = 'Add' addedId = {this.props.addedTeacherId}/>
+        <TeacherForm getTeacher = {this.props.getTeacher}
+                     onSubmit = {this.props.addTeacher}
+                     teachers = {this.props.teachers}
+                     resetAddedId = {this.props.resetAddedId} 
+                     addedId = {this.props.addedId}/>
       </div>
     )
   }
@@ -18,7 +22,7 @@ class TeachersListContainer extends Component {
 const mapStateToProps = (state) => {
   return ({
     teachers: state.teachersReducer.teachers,
-    addedTeacherId: state.teachersReducer.addedTeacherId
+    addedId: state.commonlyUsedReducer.addedId
   })
 }
-export default connect(mapStateToProps, {  getTeacher, addTeacher })(TeachersListContainer);
+export default connect(mapStateToProps, {  getTeacher, addTeacher, resetAddedId })(AddTeacherContainer);

@@ -8,6 +8,7 @@ import {home} from 'react-icons-kit/fa/home'
 import {user} from 'react-icons-kit/typicons/user';
 import {group} from 'react-icons-kit/typicons/group';
 import {graduationCap} from 'react-icons-kit/fa/graduationCap';
+import {u1F4CB} from 'react-icons-kit/noto_emoji_regular/u1F4CB'
 import {u1F4DA} from 'react-icons-kit/noto_emoji_regular/u1F4DA';
 import {logOut} from 'react-icons-kit/feather/logOut'
 import '../assets/css/icon.css'
@@ -29,7 +30,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
                  }} style={{backgroundColor:'#5968cf', position: "fixed"}}
              >
                  <SideNav.Toggle />
-                 <SideNav.Nav defaultSelected="home">
+                 <SideNav.Nav selected={location.pathname.slice(1,location.pathname.length)}>
                      <NavItem eventKey="home">
                          <NavIcon>
                              <Icon className="icon" size={30} icon={home} />
@@ -56,10 +57,18 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
                      </NavItem>
                      <NavItem eventKey="classes">
                          <NavIcon>
-                              <Icon className="icon" size={30} icon={u1F4DA} />
+                              <Icon className="icon" size={30} icon={u1F4CB} />
                          </NavIcon>
                          <NavText>
                              Classes
+                         </NavText>
+                     </NavItem>
+                     <NavItem eventKey="courses">
+                         <NavIcon>
+                              <Icon className="icon" size={30} icon={u1F4DA} />
+                         </NavIcon>
+                         <NavText>
+                             Courses
                          </NavText>
                      </NavItem>
                  </SideNav.Nav>

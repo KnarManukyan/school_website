@@ -3,6 +3,7 @@ import  loginReducer  from './loginReducer.js';
 import studentsReducer from './studentsReducer.js';
 import teachersReducer from './teachersReducer.js';
 import classesReducer from './classesReducer.js';
+import coursesReducer from './coursesReducer.js';
 import commonlyUsedReducer from './commonlyUsedReducer.js';
 
 const reducer = combineReducers({
@@ -10,6 +11,7 @@ const reducer = combineReducers({
   studentsReducer,
   teachersReducer,
   classesReducer,
+  coursesReducer,
   commonlyUsedReducer
 })
 

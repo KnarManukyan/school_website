@@ -1,8 +1,7 @@
 import { SET_TEACHER_ARRAY, SET_ADDED_TEACHER_ID } from '../actions/type.js';
 
 const initialState = {
-  teachers: [],
-  addedTeacherId: null
+  teachers: []
 };
 
 
@@ -12,12 +11,6 @@ export default function teacherReducer(state = initialState, action){
       return {
         ...state,
         teachers: action.array
-      };
-    }
-    case SET_ADDED_TEACHER_ID:{
-      return {
-        ...state,
-        addedTeacherId: action.id
       };
     }
     default:
