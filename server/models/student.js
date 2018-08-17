@@ -6,10 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     age: DataTypes.INTEGER,
     gender: DataTypes.STRING,
     phone: DataTypes.STRING,
-    email: DataTypes.STRING
+    email: DataTypes.STRING,
+    classId: DataTypes.INTEGER
   }, {});
   Student.associate = function(models) {
-    // associations can be defined here
+    Student.belongsTo(models.Classes, {foreignKey: 'classId', targetKey: 'id', as: "Classes"});
   };
   return Student;
 };

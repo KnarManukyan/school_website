@@ -1,11 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  var Class = sequelize.define('Class', {
+  var Classes = sequelize.define('Classes', {
     name: DataTypes.STRING,
-    description: DataTypes.TEXT
+    teacherId: DataTypes.INTEGER
   }, {});
-  Class.associate = function(models) {
-    // associations can be defined here
-  };
-  return Class;
+  Classes.associate = function(models) {
+    Classes.belongsTo(models.Teacher, {foreignKey: 'teacherId', targetKey: 'id', as: "Teacher"} )
+  }
+  return Classes;
 };
