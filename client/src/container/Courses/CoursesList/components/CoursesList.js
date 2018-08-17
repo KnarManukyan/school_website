@@ -62,7 +62,7 @@ class Course extends Component {
                       <td>{timetableToShow}</td>
                       <td style = {{float: 'right', marginRight: '50px'}}>
                           <button className= 'icon-button' style = {{marginRight: '40px'}} onClick = {() => {this.setState({isModalOpen: true,
-                                                                                              rowToBeKilled: index})}}>
+                                                                                                             rowToBeKilled: index})}}>
                           <Icon style={{ color: 'red' }} size={25} icon={minus} />
                           </button>
                           <button className= 'icon-button' onClick = {() => {history.push(`/courses/edit/${item.id}`)}}>

@@ -1,4 +1,4 @@
-import { SET_COURSE_ARRAY } from './type.js';
+import { SET_COURSE_ARRAY, SEND_MESSAGE } from './type.js';
 import {setAddedId} from './commonlyUsedActions'
 import {unitedFetch} from './fetch.js'
 
@@ -9,14 +9,21 @@ export function setCoursesArray(array) {
   }
 }
 
+export function sendMessage(message){
+  return {
+    type: SEND_MESSAGE,
+    message
+  }
+}
+
 export function getCourse() {
     return dispatch =>
       dispatch(unitedFetch('GET','/courses'))
       .then(response => {
-        console.log(response);
         dispatch(setCoursesArray(response));
       })
 }
+
 
 export function deleteCourse(id) {
   return dispatch =>
@@ -26,17 +33,6 @@ export function deleteCourse(id) {
     .catch(error => { console.log('request failed', error); });
 }
 
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
-}
 
 export function addCourse(input, goToEdit) {
   let body = {
@@ -44,13 +40,16 @@ export function addCourse(input, goToEdit) {
     'description': input.description,
     'classId': input.classId,
     'teacherId': input.teacherId,
-    'startDate': formatDate(input.startDate),
-    'endDate': formatDate(input.endDate)
+    'startDate': input.startDate,
+    'endDate': input.endDate,
+    'timetable': input.timetable
   }
   return dispatch =>
     dispatch(unitedFetch('PUT',`/course/add`, body))
     .then((result) => {
-      if(!goToEdit){
+      if(result.message){
+        dispatch(sendMessage(result.message))
+      }else if (!goToEdit){
         dispatch(setAddedId(result.id));
       }
     })
@@ -64,8 +63,9 @@ export function editCourse(input) {
     'description': input.description,
     'classId': input.classId,
     'teacherId': input.teacherId,
-    'startDate': formatDate(input.startDate),
-    'endDate': formatDate(input.endDate)
+    'startDate': input.startDate,
+    'endDate': input.endDate,
+    'timetable': input.timetable
   }
   return dispatch =>
     dispatch(unitedFetch('POST',`/course/edit/${input.id}`, body))

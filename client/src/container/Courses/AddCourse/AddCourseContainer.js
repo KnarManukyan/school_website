@@ -15,6 +15,7 @@ class AddCourseContainer extends Component {
                      onSubmit = {this.props.addCourse}
                      teachers = {this.props.teachers}
                      classes = {this.props.classes}
+                     message = {this.props.message}
                      addedId = {this.props.addedId}
                      resetAddedId = {this.props.resetAddedId}/>
       </div>
@@ -25,7 +26,8 @@ const mapStateToProps = (state) => {
   return ({
     addedId: state.commonlyUsedReducer.addedId,
     classes: state.classesReducer.classes,
-    teachers: state.teachersReducer.teachers
+    teachers: state.teachersReducer.teachers,
+    message: state.coursesReducer.errorMessage,
   })
 }
 export default connect(mapStateToProps, { addCourse, resetAddedId, getClass, getTeacher })(AddCourseContainer);

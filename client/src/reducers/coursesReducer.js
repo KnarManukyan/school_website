@@ -1,7 +1,8 @@
-import { SET_COURSE_ARRAY } from '../actions/type.js';
+import { SET_COURSE_ARRAY, SEND_MESSAGE } from '../actions/type.js';
 
 const initialState = {
-  courses: null
+  courses: null,
+  errorMessage: null
 };
 
 
@@ -11,6 +12,12 @@ export default function coursesReducer(state = initialState, action){
       return {
         ...state,
         courses: action.array
+      };
+    }
+    case SEND_MESSAGE: {
+      return {
+        ...state,
+        errorMessage: action.message
       };
     }
     default:
