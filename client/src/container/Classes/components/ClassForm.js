@@ -25,7 +25,9 @@ class ClassForm extends Component {
       this.setState({message: 'Teacher is required'});
     } else {
       this.setState({message: ''});
+      return true;
     }
+    return false;
   }
   render() {
     let input = this.state.input;
@@ -49,24 +51,26 @@ class ClassForm extends Component {
           </div>
           {(this.props.classRow ?
             <div  style = {{marginTop: '10px'}}>
-            <button className = 'edit-button' style = {{marginLeft: '32%'}} onClick={(e) => {e.preventDefault(); this.props.onSubmit(input);}}>
+            <button className = 'edit-button' style = {{marginLeft: '32%'}} onClick={(e) => {e.preventDefault(); if(this.validate()){this.props.onSubmit(input)}}}>
               Save
             </button>
-            <button className = 'edit-button' style = {{marginLeft: '8px'}} onClick={(e) => {e.preventDefault(); this.props.onSubmit(input);history.push(`/classes`)}}>
+            <button className = 'edit-button' style = {{marginLeft: '8px'}} onClick={(e) => {e.preventDefault(); if(this.validate()){this.props.onSubmit(input);history.push(`/classes`)}}}>
               Save and close
             </button>
             </div>
           :
           <div>
-            <button className = 'add-button' onClick={(e) => {e.preventDefault(); this.validate(); this.props.onSubmit(input, false);}}>
+            <button className = 'add-button' onClick={(e) => {e.preventDefault(); if(this.validate()){this.props.onSubmit(input, false);}}}>
               Add
             </button>
             <button className = 'add-button' onClick={(e) => {e.preventDefault();
-                                                              this.props.onSubmit(input, true);
-                                                              this.refs.input1.value = null;
-                                                              this.refs.input2.value = null;
-                                                              this.state.input = {};
-                                                              this.props.getFreeTeachers()
+                                                              if(this.validate()){
+                                                                this.props.onSubmit(input, true);
+                                                                this.refs.input1.value = null;
+                                                                this.refs.input2.value = null;
+                                                                this.state.input = {};
+                                                                this.props.getFreeTeachers()
+                                                              }
                                                             }}>
               Add More
             </button>

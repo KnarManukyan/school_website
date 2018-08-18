@@ -33,7 +33,7 @@ exports.getCourses = function(req,res){
 
 let valid = true;
 
-let validate = function(body){
+let validate = function(body, id){
   for(let k = 0; k < body.timetable.length; k++){
     models.Timetable.findAll(
       {include: ['Courses'],
@@ -45,20 +45,15 @@ let validate = function(body){
       }
    ).then(table => {
       for(let j = 0; j<table.length; j++){
-        if(body.id === table[j].course.id){
-          continue;
-        }
+        if(id != table[j].courseId){
           if(!(body.timetable[k].endTime <= table[j].startTime || body.timetable[k].startTime >= table[j].endTime)){
             valid = false;
             break;
           }
+        }
        }
      }).catch(function(error){
-             res.send({
-               "error": error,
-               "code":400,
-               "message": "error occured while adding class"
-             });
+             console.log(error);
            });
    }
 }
@@ -131,7 +126,7 @@ exports.deleteCourse = function(req,res) {
 }
 
 exports.editCourse = function(req,res) {
-  validate(req.body);
+  validate(req.body, req.param('id'));
    setTimeout(() => {
      if(valid){
        models.Courses.update({
@@ -153,12 +148,11 @@ exports.editCourse = function(req,res) {
            endTime: req.body.timetable[i].endTime
          }, {
            where: {
-             courseId: req.param('id')
+             id: req.body.timetable[i].id
            }
          })
        }
        res.send({
-         "id": course.id,
          "code":200,
          "message": `Course ${req.body.name} was edited`
        })

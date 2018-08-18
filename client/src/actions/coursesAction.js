@@ -1,4 +1,4 @@
-import { SET_COURSE_ARRAY, SEND_MESSAGE } from './type.js';
+import { SET_COURSE_ARRAY, SEND_MESSAGE, RESET_MESSAGE } from './type.js';
 import {setAddedId} from './commonlyUsedActions'
 import {unitedFetch} from './fetch.js'
 
@@ -13,6 +13,12 @@ export function sendMessage(message){
   return {
     type: SEND_MESSAGE,
     message
+  }
+}
+
+export function resetMessage(){
+  return {
+    type: RESET_MESSAGE
   }
 }
 
@@ -48,7 +54,7 @@ export function addCourse(input, goToEdit) {
     dispatch(unitedFetch('POST',`/course`, body))
     .then((result) => {
       if(result.messageToShow){
-        dispatch(sendMessage(result.messageToShow))
+        dispatch(sendMessage(result.messageToShow));
       }else if (!goToEdit){
         dispatch(setAddedId(result.id));
       }
@@ -69,5 +75,9 @@ export function editCourse(input) {
   }
   return dispatch =>
     dispatch(unitedFetch('PUT',`/course/${input.id}`, body))
+    .then((result)=>{
+      if(result.messageToShow){
+        dispatch(sendMessage(result.messageToShow))
+      }})
     .catch(error => { console.log('request failed', error); });
 }

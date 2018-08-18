@@ -44,13 +44,6 @@ class Course extends Component {
           </tr>
         {(this.props.courses ? this.props.courses.map((item, index) => {
           const editInput = this.props.courses[index];
-          let timetable = item.timetable;
-          let timetableToShow = '';
-          if(timetable.length !== 0){
-            for(let i = 0; i<timetable.length; i++){
-              timetableToShow += `${timetable[i].weekday} ${timetable[i].startTime}-${timetable[i].endTime} `
-            }
-          }
             return (
                   <tr key = {index}>
                       <td>{item.name}</td>
@@ -59,7 +52,12 @@ class Course extends Component {
                       <td>{(item.Teacher ? `${item.Teacher.firstName} ${item.Teacher.lastName}` : 'n/a')}</td>
                       <td>{item.startDate}</td>
                       <td>{item.endDate}</td>
-                      <td>{timetableToShow}</td>
+                      <td>{item.timetable.map((day)=>{
+                        return (
+                          <p> {`${day.weekday} ${day.startTime}-${day.endTime}`} </p>
+                        )
+                      }
+                      )}</td>
                       <td style = {{float: 'right', marginRight: '50px'}}>
                           <button className= 'icon-button' style = {{marginRight: '40px'}} onClick = {() => {this.setState({isModalOpen: true,
                                                                                                              rowToBeKilled: index})}}>

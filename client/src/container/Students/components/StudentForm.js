@@ -5,14 +5,38 @@ import { Icon } from 'react-icons-kit';
 import {close} from 'react-icons-kit/fa/close'
 
 class StudentForm extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      input: (this.props.studentRow ? this.props.studentRow : {}),
+      message: ''
+    }
+  }
   componentDidUpdate(){
     if(this.props.addedId){
       this.props.resetAddedId();
       history.push(`/students/edit/${this.props.addedId}`);
       }
   }
+  validate = () => {
+    if(!this.state.input.firstName){
+      this.setState({message: 'Firstname is required'});
+    } else if(!this.state.input.lastName){
+      this.setState({message: 'Lastname is required'});
+    } else if(!this.state.input.age){
+      this.setState({message: 'Age is required'});
+    } else if(!this.state.input.gender){
+      this.setState({message: 'Gender is required'});
+    } else if(!this.state.input.classId){
+      this.setState({message: 'Class is required'});
+    } else {
+      this.setState({message: ''});
+      return true;
+    }
+    return false;
+  }
   render() {
-    let input = (this.props.studentRow ? this.props.studentRow : {});
+    let input = this.state.input;
     return (
       <div className = 'content'>
         <form className = 'add-edit-form'>
@@ -37,29 +61,34 @@ class StudentForm extends Component {
                   <option value = {`${item.name}`} required />
               )})}
           </datalist>
+          <div>
+            <h6 className = 'form-required-message'> {this.state.message} </h6>
+          </div>
           {(this.props.studentRow ?
             <div  style = {{marginTop: '10px'}}>
-              <button className = 'edit-button' style = {{marginLeft: '32%'}} onClick={(e) => {e.preventDefault(); this.props.onSubmit(input);}}>
+              <button className = 'edit-button' style = {{marginLeft: '32%'}} onClick={(e) => {e.preventDefault(); if(this.validate()){this.props.onSubmit(input)}}}>
                 Save
               </button>
-              <button className = 'edit-button' style = {{marginLeft: '8px'}} onClick={(e) => {e.preventDefault(); this.props.onSubmit(input);history.push(`/students`)}}>
+              <button className = 'edit-button' style = {{marginLeft: '8px'}} onClick={(e) => {e.preventDefault(); if(this.validate()){this.props.onSubmit(input);history.push(`/students`)}}}>
                 Save and close
               </button>
             </div>
           :
           <div>
-            <button className = 'add-button' onClick={(e) => {e.preventDefault(); this.props.onSubmit(input, false);}}>
+            <button className = 'add-button' onClick={(e) => {e.preventDefault(); if(this.validate()){this.props.onSubmit(input, false)}}}>
               Add
             </button>
             <button className = 'add-button' onClick={(e) => {e.preventDefault();
-                                                              this.props.onSubmit(input, true);
-                                                              this.refs.input1.value = null;
-                                                              this.refs.input2.value = null;
-                                                              this.refs.input3.value = null;
-                                                              this.refs.input4.value = null;
-                                                              this.refs.input5.value = null;
-                                                              this.refs.input6.value = null;
-                                                              this.refs.input7.value = null;
+                                                              if(this.validate()){
+                                                                this.props.onSubmit(input, true);
+                                                                this.refs.input1.value = null;
+                                                                this.refs.input2.value = null;
+                                                                this.refs.input3.value = null;
+                                                                this.refs.input4.value = null;
+                                                                this.refs.input5.value = null;
+                                                                this.refs.input6.value = null;
+                                                                this.refs.input7.value = null;
+                                                            }
                                                             }}>
               Add More
             </button>

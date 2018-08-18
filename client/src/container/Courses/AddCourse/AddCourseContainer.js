@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { addCourse, resetAddedId, getClasses, getTeachers } from '../../../actions';
+import { addCourse, resetAddedId, getClasses, getTeachers, resetMessage } from '../../../actions';
 import  CourseForm from '../components/CourseForm.js'
 
 class AddCourseContainer extends Component {
@@ -17,7 +17,8 @@ class AddCourseContainer extends Component {
                      classes = {this.props.classes}
                      message = {this.props.message}
                      addedId = {this.props.addedId}
-                     resetAddedId = {this.props.resetAddedId}/>
+                     resetAddedId = {this.props.resetAddedId}
+                     resetMessage = {this.props.resetMessage}/>
       </div>
     )
   }
@@ -30,4 +31,4 @@ const mapStateToProps = (state) => {
     message: state.coursesReducer.errorMessage,
   })
 }
-export default connect(mapStateToProps, { addCourse, resetAddedId, getClasses, getTeachers })(AddCourseContainer);
+export default connect(mapStateToProps, { addCourse, resetAddedId, getClasses, getTeachers, resetMessage })(AddCourseContainer);
