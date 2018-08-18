@@ -47,8 +47,8 @@ export function addCourse(input, goToEdit) {
   return dispatch =>
     dispatch(unitedFetch('POST',`/course`, body))
     .then((result) => {
-      if(result.message){
-        dispatch(sendMessage(result.message))
+      if(result.messageToShow){
+        dispatch(sendMessage(result.messageToShow))
       }else if (!goToEdit){
         dispatch(setAddedId(result.id));
       }
