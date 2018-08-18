@@ -17,6 +17,15 @@ module.exports = {
           },
         onUpdate: 'CASCADE'
       },
+      classId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+          references: {
+              model: 'Classes',
+              key: 'id',
+          },
+        onUpdate: 'CASCADE'
+      },
       weekday: {
         allowNull: false,
         type: Sequelize.STRING

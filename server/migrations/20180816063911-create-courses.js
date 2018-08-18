@@ -16,22 +16,22 @@ module.exports = {
         type: Sequelize.TEXT
       },
       classId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
           references: {
               model: 'Classes',
               key: 'id',
           },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
       },
       teacherId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
           references: {
               model: 'Teachers',
               key: 'id',
           },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
       },
       startDate: {
         allowNull: false,

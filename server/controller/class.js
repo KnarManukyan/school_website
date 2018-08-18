@@ -75,14 +75,15 @@ exports.editClass = function(req,res) {
 }
 
 exports.getFreeTeachers = function(req,res){
-  let classes = [];
-  let teachers = [];
   models.Classes.findAll()
   .then(function(classes) {
     return classes;
   }).then(function(classes) {
   models.Teacher.findAll()
   .then(function(teachers) {
+    if(classes.length === 0){
+      return teachers;
+    }
     let freeTeachers = [];
     for(let i = 0; i<teachers.length; i++){
       for(let j = 0; j<classes.length;j++){

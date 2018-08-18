@@ -7,7 +7,7 @@ export default class Error extends Component{
     return(
       <div className='container'>
         <div className='space' >
-          <img className='image' src = {space} />
+          <img className='image' src = {space} alt = 'space' />
         </div>
         <div className='error-text-div'>
           <h2 className = 'error-text'>ERROR 404</h2>

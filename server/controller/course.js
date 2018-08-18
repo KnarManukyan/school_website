@@ -25,36 +25,93 @@ exports.getCourses = function(req,res){
           }
           res.send(finalResult)
            })
-        }).error(function (err) {
+        }).catch(function (err) {
                console.log("Error:" + err);
            });
 
 }
 
-exports.addCourse = function(req,res) {
-  models.Courses.create({
-    name: req.body.name,
-    description: req.body.description,
-    classId: req.body.classId,
-    teacherId: req.body.teacherId,
-    startDate: req.body.startDate,
-    endDate: req.body.endDate
-  }).then((courses) => {
-    res.send({
-      "id": courses.dataValues.id,
-      "code":200,
-      "message": `Course ${req.body.name} was added`
-    });
-  }).catch(function(error){
-    res.send({
-      "error": error,
-      "code":400,
-      "message": "error occured while adding class"
-    });
-  });
+let valid = true;
+
+let validate = function(body){
+  for(let k = 0; k < body.timetable.length; k++){
+    models.Timetable.findAll(
+      {include: ['Courses'],
+       attributes: ['id', 'courseId', 'classId', 'weekday', 'startTime', 'endTime'],
+       where: {
+         classId: body.classId,
+         weekday: body.timetable[k].weekday
+       }
+      }
+   ).then(table => {
+      for(let j = 0; j<table.length; j++){
+        if(body.id === table[j].course.id){
+          continue;
+        }
+          if(!(body.timetable[k].endTime <= table[j].startTime || body.timetable[k].startTime >= table[j].endTime)){
+            valid = false;
+            break;
+          }
+       }
+     }).catch(function(error){
+             res.send({
+               "error": error,
+               "code":400,
+               "message": "error occured while adding class"
+             });
+           });
+   }
 }
 
+exports.addCourse = function(req,res) {
+  validate(req.body);
+   setTimeout(() => {
+     if(valid){
+       models.Courses.create({
+         name: req.body.name,
+         description: req.body.description,
+         classId: req.body.classId,
+         teacherId: req.body.teacherId,
+         startDate: req.body.startDate,
+         endDate: req.body.endDate
+       }).then((course) => {
+           for(let i = 0; i<req.body.timetable.length; i++){
+             models.Timetable.create({
+               courseId: course.id,
+               classId: req.body.classId,
+               weekday: req.body.timetable[i].weekday,
+               startTime: req.body.timetable[i].startTime,
+               endTime: req.body.timetable[i].endTime
+             })
+           }
+           res.send({
+             "id": course.dataValues.id,
+             "code":200,
+             "message": `Course ${req.body.name} was added`
+           })
+         }).catch(function(error){
+              res.send({
+                "error": error,
+                "code":400,
+                "message": "error occured while adding class"
+              });
+            });
+    } else {
+      res.send({
+        "code": 400,
+        "messageToShow": "Time overlap has occured!"
+      })
+    }
+  }, 100);
+  valid = true;
+  }
+
 exports.deleteCourse = function(req,res) {
+  models.Timetable.destroy({
+      where: {
+        courseId: req.param('id')
+     }
+   })
   models.Courses.destroy({
       where: {
         id: req.param('id')
@@ -66,6 +123,7 @@ exports.deleteCourse = function(req,res) {
     });
   }).catch(function(error){
     res.send({
+      "error":error,
       "code":400,
       "message": "error occured while deleting this course"
     });
@@ -73,27 +131,50 @@ exports.deleteCourse = function(req,res) {
 }
 
 exports.editCourse = function(req,res) {
-  models.Courses.update({
-    name: req.body.name,
-    description: req.body.description,
-    classId: req.body.classId,
-    teacherId: req.body.teacherId,
-    startDate: req.body.teacherId,
-    endDate: req.body.teacherId
-  }, {
-    where: {
-      id: req.param('id')
+  validate(req.body);
+   setTimeout(() => {
+     if(valid){
+       models.Courses.update({
+         name: req.body.name,
+         description: req.body.description,
+         classId: req.body.classId,
+         teacherId: req.body.teacherId,
+         startDate: req.body.startDate,
+         endDate: req.body.endDate
+       }, {
+         where: {
+           id: req.param('id')
+         }
+       }).then((course) => {
+       for(let i = 0; i<req.body.timetable.length; i++){
+         models.Timetable.update({
+           weekday: req.body.timetable[i].weekday,
+           startTime: req.body.timetable[i].startTime,
+           endTime: req.body.timetable[i].endTime
+         }, {
+           where: {
+             courseId: req.param('id')
+           }
+         })
+       }
+       res.send({
+         "id": course.id,
+         "code":200,
+         "message": `Course ${req.body.name} was edited`
+       })
+      }).catch(function(error){
+              res.send({
+                "error": error,
+                "code":400,
+                "message": "error occured while adding class"
+              });
+            });
+    } else {
+      res.send({
+        "code": 400,
+        "messageToShow": "Time overlap has occured!"
+      })
     }
-  }).then(() => {
-    res.send({
-      "code":200,
-      "message": `Course ${req.body.name} was edited`
-    });
-  }).catch(function(error){
-    res.send({
-      "error": error,
-      "code":400,
-      "message": "error occured while editing this course"
-    });
-  });
-}
+  }, 100);
+  valid = true;
+  }

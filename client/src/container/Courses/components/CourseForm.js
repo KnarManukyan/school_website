@@ -105,7 +105,7 @@ class CourseForm extends Component {
              <h6 style = {{color: 'red', pardding: '10px', fontSize: '15px', padding: '10px'}}> {this.props.message} </h6>
            </div>
            <div>
-             <h6 style = {{color: 'red', pardding: '10px', fontSize: '15px', padding: '10px'}}> {this.state.message} </h6>
+             <h6 styclassName = 'form-required-message'> {this.state.message} </h6>
            </div>
            {(this.props.courseRow ?
             <div  style = {{marginTop: '10px'}}>

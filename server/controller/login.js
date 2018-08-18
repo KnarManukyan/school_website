@@ -19,7 +19,7 @@ exports.login = function(req,res){
     else{
       if(Object.keys(results).length > 0)  {
         if(bcrypt.compareSync(password, results.password)){
-          jwt.sign({results}, process.env.SECRET_KEY,  { expiresIn: '1h' }, function(err, token) {
+          jwt.sign({results}, process.env.SECRET_KEY,  { expiresIn: '1d' }, function(err, token) {
             res.send({
               "code":200,
               "message":"successfully logged in",
