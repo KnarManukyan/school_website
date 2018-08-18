@@ -15,7 +15,7 @@ class Student extends Component {
     }
   }
   componentDidMount() {
-   this.props.getStudent();
+   this.props.getStudents();
   }
   handleDelete = () => {
     this.props.deleteStudent(this.props.students[this.state.rowToBeKilled].id);
@@ -39,7 +39,7 @@ class Student extends Component {
             <th>gender</th>
             <th>phone</th>
             <th>email</th>
-            <th>classId</th>
+            <th>class</th>
             <th style = {{float: 'right', marginRight: '65px'}} >options</th>
           </tr>
         {(this.props.students ? this.props.students.map((item, index) => {

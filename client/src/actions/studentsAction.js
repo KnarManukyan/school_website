@@ -9,7 +9,7 @@ export function setStudentsArray(array) {
   }
 }
 
-export function getStudent() {
+export function getStudents() {
     return dispatch =>
       dispatch(unitedFetch('GET','/students'))
       .then(response => {
@@ -21,7 +21,7 @@ export function deleteStudent(id) {
   return dispatch =>
     dispatch(unitedFetch('DELETE',`/student/${id}`))
     .then((result) => {
-    return dispatch(getStudent())})
+    return dispatch(getStudents())})
     .catch(error => { console.log('request failed', error); });
 }
 
@@ -36,7 +36,7 @@ export function addStudent(student, goToEdit) {
     'classId': student.classId
   }
   return dispatch =>
-    dispatch(unitedFetch('PUT',`/student`, body))
+    dispatch(unitedFetch('POST',`/student`, body))
     .then((result) => {
       if(!goToEdit){
         dispatch(setAddedId(result.id));
@@ -57,6 +57,6 @@ export function editStudent(input) {
     'classId': input.classId
   }
   return dispatch =>
-    dispatch(unitedFetch('POST',`/student/${input.id}`, body))
+    dispatch(unitedFetch('PUT',`/student/${input.id}`, body))
     .catch(error => { console.log('request failed', error); });
 }

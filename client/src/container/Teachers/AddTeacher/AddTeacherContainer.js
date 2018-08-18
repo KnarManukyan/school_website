@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getTeacher, addTeacher, resetAddedId } from '../../../actions';
+import { getTeachers, addTeacher, resetAddedId } from '../../../actions';
 import  TeacherForm from '../components/TeacherForm.js'
 
 class AddTeacherContainer extends Component {
   componentDidMount(){
-    this.props.getTeacher();
+    this.props.getTeachers();
   }
   render() {
     return (
       <div>
-        <TeacherForm getTeacher = {this.props.getTeacher}
+        <TeacherForm getTeachers = {this.props.getTeachers}
                      onSubmit = {this.props.addTeacher}
                      teachers = {this.props.teachers}
-                     resetAddedId = {this.props.resetAddedId} 
+                     resetAddedId = {this.props.resetAddedId}
                      addedId = {this.props.addedId}/>
       </div>
     )
@@ -25,4 +25,4 @@ const mapStateToProps = (state) => {
     addedId: state.commonlyUsedReducer.addedId
   })
 }
-export default connect(mapStateToProps, {  getTeacher, addTeacher, resetAddedId })(AddTeacherContainer);
+export default connect(mapStateToProps, {  getTeachers, addTeacher, resetAddedId })(AddTeacherContainer);

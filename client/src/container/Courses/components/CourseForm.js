@@ -42,9 +42,7 @@ class CourseForm extends Component {
     if(this.props.courseRow){
       this.state.input = this.props.courseRow;
       this.state.timetable = this.props.courseRow.timetable;
-      console.log(this.props.courseRow.timetable);
     }
-
     return (
       <div className = 'content'>
         <form className = 'add-edit-form'>

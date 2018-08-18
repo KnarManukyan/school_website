@@ -1,7 +1,7 @@
 import { SET_CLASS_ARRAY, SET_FREE_TEACHERS } from '../actions/type.js';
 const initialState = {
-  classes: [],
-  freeTeachers: [],
+  classes: null,
+  freeTeachers: null,
 };
 
 

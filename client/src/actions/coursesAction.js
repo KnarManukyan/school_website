@@ -16,7 +16,7 @@ export function sendMessage(message){
   }
 }
 
-export function getCourse() {
+export function getCourses() {
     return dispatch =>
       dispatch(unitedFetch('GET','/courses'))
       .then(response => {
@@ -27,9 +27,9 @@ export function getCourse() {
 
 export function deleteCourse(id) {
   return dispatch =>
-    dispatch(unitedFetch('DELETE',`/course/delete/${id}`))
+    dispatch(unitedFetch('DELETE',`/course/${id}`))
     .then((result) => {
-    return dispatch(getCourse())})
+    return dispatch(getCourses())})
     .catch(error => { console.log('request failed', error); });
 }
 
@@ -45,7 +45,7 @@ export function addCourse(input, goToEdit) {
     'timetable': input.timetable
   }
   return dispatch =>
-    dispatch(unitedFetch('PUT',`/course/add`, body))
+    dispatch(unitedFetch('POST',`/course`, body))
     .then((result) => {
       if(result.message){
         dispatch(sendMessage(result.message))
@@ -68,6 +68,6 @@ export function editCourse(input) {
     'timetable': input.timetable
   }
   return dispatch =>
-    dispatch(unitedFetch('POST',`/course/edit/${input.id}`, body))
+    dispatch(unitedFetch('PUT',`/course/${input.id}`, body))
     .catch(error => { console.log('request failed', error); });
 }

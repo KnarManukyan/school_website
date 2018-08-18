@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getStudent, addStudent, resetAddedId, getClass } from '../../../actions';
+import { getStudents, addStudent, resetAddedId, getClasses } from '../../../actions';
 import  StudentForm from '../components/StudentForm.js'
 
 class AddStudentContainer extends Component {
   componentDidMount(){
-    this.props.getStudent();
-    this.props.getClass();
+    this.props.getStudents();
+    this.props.getClasses();
   }
   render() {
     return (
       <div>
-        <StudentForm getStudent = {this.props.getStudent}
+        <StudentForm getStudents = {this.props.getStudents}
                      onSubmit = {this.props.addStudent}
                      students = {this.props.students}
                      classes = {this.props.classes}
@@ -28,4 +28,4 @@ const mapStateToProps = (state) => {
     classes: state.classesReducer.classes
   })
 }
-export default connect(mapStateToProps, {  getStudent, addStudent, resetAddedId, getClass })(AddStudentContainer);
+export default connect(mapStateToProps, {  getStudents, addStudent, resetAddedId, getClasses })(AddStudentContainer);

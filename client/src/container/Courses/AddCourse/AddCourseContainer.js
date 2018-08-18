@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { addCourse, resetAddedId, getClass, getTeacher } from '../../../actions';
+import { addCourse, resetAddedId, getClasses, getTeachers } from '../../../actions';
 import  CourseForm from '../components/CourseForm.js'
 
 class AddCourseContainer extends Component {
   componentDidMount(){
-    this.props.getClass();
-    this.props.getTeacher();
+    this.props.getClasses();
+    this.props.getTeachers();
   }
   render() {
     return (
       <div>
-        <CourseForm getCourse = {this.props.getCourse}
+        <CourseForm getCourses = {this.props.getCourses}
                      onSubmit = {this.props.addCourse}
                      teachers = {this.props.teachers}
                      classes = {this.props.classes}
@@ -30,4 +30,4 @@ const mapStateToProps = (state) => {
     message: state.coursesReducer.errorMessage,
   })
 }
-export default connect(mapStateToProps, { addCourse, resetAddedId, getClass, getTeacher })(AddCourseContainer);
+export default connect(mapStateToProps, { addCourse, resetAddedId, getClasses, getTeachers })(AddCourseContainer);

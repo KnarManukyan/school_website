@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getClass, editClass, getTeacher, getFreeTeachers} from '../../../actions';
+import { getClasses, editClass, getTeachers, getFreeTeachers} from '../../../actions';
 import  ClassForm from '../components/ClassForm.js'
 
 class EditClassContainer extends Component {
@@ -12,8 +12,8 @@ class EditClassContainer extends Component {
      }
   }
   componentDidMount(){
-    this.props.getClass();
-    this.props.getTeacher();
+    this.props.getClasses();
+    this.props.getTeachers();
   }
   componentDidUpdate(){
        if(!this.state.checked){
@@ -44,4 +44,4 @@ const mapStateToProps = (state) => {
     freeTeachers: state.classesReducer.freeTeachers
   })
 }
-export default connect(mapStateToProps, {  getClass, editClass, getTeacher, getFreeTeachers })(EditClassContainer);
+export default connect(mapStateToProps, {  getClasses, editClass, getTeachers, getFreeTeachers })(EditClassContainer);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getCourse, editCourse, getClass, getTeacher } from '../../../actions';
+import { getCourses, editCourse, getClasses, getTeachers } from '../../../actions';
 import  CourseForm from '../components/CourseForm.js'
 
 class EditCourseContainer extends Component {
@@ -11,9 +11,9 @@ class EditCourseContainer extends Component {
      }
   }
   componentDidMount(){
-    this.props.getCourse();
-    this.props.getClass();
-    this.props.getTeacher();
+    this.props.getCourses();
+    this.props.getClasses();
+    this.props.getTeachers();
   }
   render() {
     if(this.props.courses){
@@ -41,4 +41,4 @@ const mapStateToProps = (state) => {
     teachers: state.teachersReducer.teachers
   })
 }
-export default connect(mapStateToProps, {  getCourse, editCourse, getClass, getTeacher })(EditCourseContainer);
+export default connect(mapStateToProps, {  getCourses, editCourse, getClasses, getTeachers })(EditCourseContainer);

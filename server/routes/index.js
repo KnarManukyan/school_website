@@ -14,25 +14,25 @@ router.use(getToken);
 router.use(verifyToken);
 //------------------------------------------------------------
 router.get('/students',studentController.getStudents);
-router.put('/student',studentController.addStudent);
+router.post('/student',studentController.addStudent);
 router.delete('/student/:id',studentController.deleteStudent);
-router.post('/student/:id',studentController.editStudent);
+router.put('/student/:id',studentController.editStudent);
 //------------------------------------------------------------
 router.get('/teachers',teacherController.getTeachers);
-router.put('/teacher',teacherController.addTeacher);
+router.post('/teacher',teacherController.addTeacher);
 router.delete('/teacher/:id',teacherController.deleteTeacher);
-router.post('/teacher/:id',teacherController.editTeacher);
+router.put('/teacher/:id',teacherController.editTeacher);
 //------------------------------------------------------------
 router.get('/classes',classController.getClasses);
-router.put('/class',classController.addClass);
+router.post('/class',classController.addClass);
 router.delete('/class/:id',classController.deleteClass);
-router.post('/class/:id',classController.editClass);
-router.get('/freeTeachers/:id',classController.getFreeTeachers);
+router.put('/class/:id',classController.editClass);
+router.get('/freeTeachers',classController.getFreeTeachers);
 //------------------------------------------------------------
 router.get('/courses',courseController.getCourses);
-router.put('/course/add',courseController.addCourse);
-router.delete('/course/delete/:id',courseController.deleteCourse);
-router.post('/course/edit/:id',courseController.editCourse);
+router.post('/course',courseController.addCourse);
+router.delete('/course/:id',courseController.deleteCourse);
+router.put('/course/:id',courseController.editCourse);
 //------------------------------------------------------------
 function getToken(req, res, next) {
     const bearerHeader = req.headers['authorization'];

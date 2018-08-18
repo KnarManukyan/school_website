@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getTeacher, editTeacher } from '../../../actions';
+import { getTeachers, editTeacher } from '../../../actions';
 import  TeacherForm from '../components/TeacherForm.js'
 
 class EditTeacherContainer extends Component {
@@ -11,7 +11,7 @@ class EditTeacherContainer extends Component {
      }
   }
   componentDidMount(){
-    this.props.getTeacher();
+    this.props.getTeachers();
   }
   render() {
     for(let i = 0; i<this.props.teachers.length; i++){
@@ -33,4 +33,4 @@ const mapStateToProps = (state) => {
     teachers: state.teachersReducer.teachers
   })
 }
-export default connect(mapStateToProps, {  getTeacher, editTeacher })(EditTeacherContainer);
+export default connect(mapStateToProps, {  getTeachers, editTeacher })(EditTeacherContainer);

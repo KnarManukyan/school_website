@@ -15,7 +15,7 @@ class Course extends Component {
     }
   }
   componentDidMount() {
-   this.props.getCourse();
+   this.props.getCourses();
   }
   handleDelete = () => {
     this.props.deleteCourse(this.props.courses[this.state.rowToBeKilled].id);

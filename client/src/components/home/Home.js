@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import './Admin.css';
+import './home.css';
 import '../component.css';
-import pic1 from '../../assets/motivationalQuote.jpg'
+import pic1 from '../../assets/success.jpg'
 import pic2 from '../../assets/wellEducatedMind.jpg';
-import pic3 from '../../assets/The aim of education is the knowledge not of facts but of values..jpg';
+import pic3 from '../../assets/TheAimOfEducation.jpg';
 
 class Admin extends Component {
   constructor(props){

@@ -3,7 +3,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import RouteError from '../components/error/RouteError.js';
 import App from '../components/App.js';
 import Login from '../container/Login/loginContainer.js';
-import Admin from '../components/admin/Admin.js';
+import Home from '../components/home/Home.js';
 import EditStudentContainer from '../container/Students/EditStudent/EditStudentContainer.js';
 import AddStudentContainer from '../container/Students/AddStudent/AddStudentContainer.js';
 import StudentsList from '../container/Students/StudentsList/StudentsListContainer.js';
@@ -25,7 +25,7 @@ export default class BrowserRouter extends Component{
         <Router history={history}>
           <Switch>
             <Route path={"/"} component={App} exact/>
-            <PrivateRoute exact path="/home" component={Admin} />
+            <PrivateRoute exact path="/home" component={Home} />
             <Route  path={"/login"} render={() => (
               localStorage.getItem('user') ? (<Redirect to={"/home"}/>) : (<Login />))}/>
               <PrivateRoute path={"/students"} component={StudentsList} exact/>

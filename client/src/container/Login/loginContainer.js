@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {fetchUser, setLoginFailure} from '../../actions'
 import LoginForm from './components/loginForm'
 
-class Login extends Component {
+class LoginContainer extends Component {
   render() {
     return (
       <div>
@@ -20,4 +20,4 @@ const mapStateToProps = (state) => {
   })
 }
 
-export default connect(mapStateToProps, {fetchUser, setLoginFailure})(Login);
+export default connect(mapStateToProps, {fetchUser, setLoginFailure})(LoginContainer);

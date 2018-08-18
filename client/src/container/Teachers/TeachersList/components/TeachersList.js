@@ -15,7 +15,7 @@ class Teacher extends Component {
     }
   }
   componentDidMount() {
-   this.props.getTeacher();
+   this.props.getTeachers();
   }
   handleDelete = () => {
     this.props.deleteTeacher(this.props.teachers[this.state.rowToBeKilled].id);

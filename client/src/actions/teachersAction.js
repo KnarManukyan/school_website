@@ -10,7 +10,7 @@ export function setTeachersArray(array) {
 }
 
 
-export function getTeacher() {
+export function getTeachers() {
   return dispatch =>
     dispatch(unitedFetch('GET','/teachers'))
     .then(response => {
@@ -22,7 +22,7 @@ export function deleteTeacher(id) {
   return dispatch =>
     dispatch(unitedFetch('DELETE',`/teacher/${id}`))
     .then((result) => {
-    return dispatch(getTeacher())})
+    return dispatch(getTeachers())})
     .catch(error => { console.log('request failed', error); });
 }
 
@@ -34,7 +34,7 @@ export function addTeacher(teacher, goToEdit) {
         'email': teacher.email
       }
       return dispatch =>
-        dispatch(unitedFetch('PUT',`/teacher`, body))
+        dispatch(unitedFetch('POST',`/teacher`, body))
         .then((result) => {
           if(!goToEdit){
             dispatch(setAddedId(result.id));
@@ -51,6 +51,6 @@ export function editTeacher(input) {
         'email': input.email,
       }
       return dispatch =>
-        dispatch(unitedFetch('POST',`/teacher/${input.id}`, body))
+        dispatch(unitedFetch('PUT',`/teacher/${input.id}`, body))
         .catch(error => { console.log('request failed', error); });
 }
