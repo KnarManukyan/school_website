@@ -20,3 +20,11 @@
 .add-input-title{
     text-align: center;
 }
+
+.form-required-message{
+    color: red;
+    pardding: 10px;
+    fontSize: 12px;
+    padding: 10px;
+    fontFamily: Poppins-Regular, sans-serif
+}

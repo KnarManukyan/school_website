@@ -31,13 +31,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       classId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
               model: 'Classes',
               key: 'id',
           },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
       },
       createdAt: {
         allowNull: false,

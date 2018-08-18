@@ -57,9 +57,9 @@ export function editClass(input) {
         .catch(error => { console.log('request failed', error); });
 }
 
-export function getFreeTeachers(id) {
+export function getFreeTeachers() {
   return dispatch =>
-    dispatch(unitedFetch('GET',`/freeTeachers/${id}`))
+    dispatch(unitedFetch('GET',`/freeTeachers`))
     .then((result) => {
       dispatch(setFreeTeachers(result));
         return result;
