@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {history} from '../../../history.js';
 import '../../../assets/css/form.css'
 import { Icon } from 'react-icons-kit';
-import {close} from 'react-icons-kit/fa/close'
-import {minus} from 'react-icons-kit/feather/minus'
+import {close} from 'react-icons-kit/fa/close';
 
 class CourseForm extends Component {
   constructor(props){
@@ -85,7 +84,7 @@ class CourseForm extends Component {
               Add Hour
              </button>
            </div>
-           {(this.state.timetable ? this.state.timetable.map((item,index) =>{
+           {(this.state.timetable.map((item,index) =>{
              return(<div>
                <select name="classes" className = 'add-edit-input' style = {{padding: '5px 10px', width: '30%'}} onChange={(evt) => {this.state.timetable[index].weekday = evt.target.value}}>
                <option  value=''  default> {(item.weekday ? item.weekday : 'Choose a weekday')} </option>
@@ -105,12 +104,12 @@ class CourseForm extends Component {
                   Remove
                 </button>
              </div>)
-           }) : true)}
+           }))}
            <div>
              <h6 style = {{color: 'red', pardding: '10px', fontSize: '15px', padding: '10px'}}> {this.props.message} </h6>
            </div>
            <div>
-             <h6 styclassName = 'form-required-message'> {this.state.message} </h6>
+             <h6 className = 'form-required-message'> {this.state.message} </h6>
            </div>
            {(this.props.courseRow ?
             <div  style = {{marginTop: '10px'}}>

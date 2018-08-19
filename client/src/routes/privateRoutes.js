@@ -1,11 +1,10 @@
 import React from 'react';
 import { Router, Route, Redirect } from 'react-router-dom';
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import {history} from '../history.js';
 import { Icon } from 'react-icons-kit'
 import {home} from 'react-icons-kit/fa/home'
-import {user} from 'react-icons-kit/typicons/user';
 import {group} from 'react-icons-kit/typicons/group';
 import {graduationCap} from 'react-icons-kit/fa/graduationCap';
 import {u1F4CB} from 'react-icons-kit/noto_emoji_regular/u1F4CB'
@@ -30,7 +29,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
                  }} style={{backgroundColor:'#5968cf', position: "fixed"}}
              >
                  <SideNav.Toggle />
-                 <SideNav.Nav selected={location.pathname.slice(1,location.pathname.length)}>
+                 <SideNav.Nav selected={location.pathname.split('/')[1]}>
                      <NavItem eventKey="home">
                          <NavIcon>
                              <Icon className="icon" size={30} icon={home} />

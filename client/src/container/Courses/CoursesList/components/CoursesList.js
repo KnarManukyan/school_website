@@ -43,7 +43,6 @@ class Course extends Component {
             <th style = {{float: 'right', marginRight: '65px'}} >options</th>
           </tr>
         {(this.props.courses ? this.props.courses.map((item, index) => {
-          const editInput = this.props.courses[index];
             return (
                   <tr key = {index}>
                       <td>{item.name}</td>
@@ -52,9 +51,9 @@ class Course extends Component {
                       <td>{(item.Teacher ? `${item.Teacher.firstName} ${item.Teacher.lastName}` : 'n/a')}</td>
                       <td>{item.startDate}</td>
                       <td>{item.endDate}</td>
-                      <td>{item.timetable.map((day)=>{
+                      <td>{item.timetable.map((day, index)=>{
                         return (
-                          <p> {`${day.weekday} ${day.startTime}-${day.endTime}`} </p>
+                          <p key={index}> {`${day.weekday} ${day.startTime}-${day.endTime}`} </p>
                         )
                       }
                       )}</td>
@@ -69,13 +68,14 @@ class Course extends Component {
                       </td>
                   </tr>
             )
-        }) : <div className='loader'></div>)}
+        }) : true)}
 
           </tbody>
         </table>
+        {(!this.props.courses ?  <div className="loader"></div> : true)}
         </div>
         <Modal show={this.state.isModalOpen}>
-          <p>Are you sure, that you want to delete him/her?</p>
+          <p>Are you sure, that you want to delete this course?</p>
           <button className = 'modal-button' onClick = {this.handleDelete}> Yes</button>
           <button className = 'modal-button' onClick ={()=>{this.setState({isModalOpen: false})}}> No </button>
         </Modal>

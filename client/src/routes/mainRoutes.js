@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
-import RouteError from '../components/error/RouteError.js';
+import RouteError from '../components/RouteError.js';
 import App from '../components/App.js';
 import Login from '../container/Login/loginContainer.js';
-import Home from '../components/home/Home.js';
+import Home from '../components/Home.js';
 import EditStudentContainer from '../container/Students/EditStudent/EditStudentContainer.js';
 import AddStudentContainer from '../container/Students/AddStudent/AddStudentContainer.js';
 import StudentsList from '../container/Students/StudentsList/StudentsListContainer.js';

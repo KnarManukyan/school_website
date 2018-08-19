@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getClasses, addClass, resetAddedId, getTeachers, getFreeTeachers, setFreeTeachers } from '../../../actions';
+import { getClasses, addClass, resetAddedId, getTeachers, getFreeTeachers} from '../../../actions';
 import  ClassForm from '../components/ClassForm.js'
 
 class AddClassContainer extends Component {

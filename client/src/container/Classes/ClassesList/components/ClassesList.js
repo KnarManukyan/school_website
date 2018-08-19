@@ -36,10 +36,9 @@ class Class extends Component {
             <th>teacher</th>
             <th style = {{float: 'right', marginRight: '65px'}} >options</th>
           </tr>
-        {this.props.classes ? this.props.classes.map((item, index) => {
-          const editInput = this.props.classes[index];
+        {(this.props.classes ? this.props.classes.map((item, index) => {
             return (
-                  <tr>
+                  <tr key = {index}>
                       <td>{item.name}</td>
                       <td>{(item.Teacher ? `${item.Teacher.firstName} ${item.Teacher.lastName}` : "n/a")}</td>
                       <td style = {{float: 'right', marginRight: '50px'}}>
@@ -53,10 +52,11 @@ class Class extends Component {
                       </td>
                   </tr>
             )
-        }):  <div className="loader"></div>}
+        }): true)}
 
           </tbody>
         </table>
+        {(!this.props.classes ?  <div className="loader"></div> : true)}
         </div>
         <Modal show={this.state.isModalOpen}>
           <p>Are you sure, that you want to delete this class?</p>

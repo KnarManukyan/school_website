@@ -1,0 +1,34 @@
+.container{
+  display:flex;
+}
+.space{
+  background-repeat:no-repeat;
+  background-size:contain;
+  flex: 1;
+}
+
+.image{
+  height: 107%;
+}
+
+.error-text-div{
+  width: 400px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 50px;
+}
+
+.error-text{
+  font-size: 10px;
+  margin-top: 50%;
+  color: #e51919;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 4em;
+  font-weight: bold;
+  line-height: 20px;
+  text-shadow: 1px 1px rgba(250,250,250,.3);
+}
+
+.error-info{
+  margin-top: 10%;
+}

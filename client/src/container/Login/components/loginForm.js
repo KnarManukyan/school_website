@@ -20,7 +20,7 @@ class LoginForm extends Component {
       [inputName]: event.target.value,
     }, () => {
       this.validateInputs();
-      (this.props.message ? this.props.setLoginFailure(null) : true)
+      if(this.props.message){this.props.setLoginFailure(null)}
     })
   }
 

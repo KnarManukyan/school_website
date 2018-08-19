@@ -50,17 +50,13 @@ class StudentForm extends Component {
           <input  ref = 'input4' className = 'add-edit-input' defaultValue={input.gender} placeholder='Enter gender' onChange={(evt) => {input.gender = evt.target.value}}/>
           <input  ref = 'input5' className = 'add-edit-input' defaultValue={input.phone} placeholder='Enter phone' onChange={(evt) => {input.phone = evt.target.value}}/>
           <input  ref = 'input6' className = 'add-edit-input' defaultValue={input.email} placeholder='Enter email' onChange={(evt) => {input.email = evt.target.value}}/>
-          <input  ref = 'input7' className = 'add-edit-input' defaultValue = {(input.Classes ? `${input.Classes.name}` : "")} placeholder="Choose a class"  type="text" list="data" onChange={(evt)=>{for(let i = 0; i<this.props.classes.length; i++){
-                                                                                                                                                            if(evt.target.value === `${this.props.classes[i].name}`){
-                                                                                                                                                               input.classId = this.props.classes[i].id;
-                                                                                                                                                            }
-                                                                                                                                                          }}} />
-          <datalist id="data">
-          {this.props.classes.map((item) =>{
-             return(
-                  <option value = {`${item.name}`} required />
-              )})}
-          </datalist>
+          <select  ref = 'input7' name="classes"  className = 'add-edit-input' style = {{padding: '10px 20px'}} onChange={(evt) => {input.classId = evt.target.value;}}>>
+          <option value=''  default> {(input.Classes ? input.Classes.name :'Choose a class')} </option>
+           {this.props.classes ? this.props.classes.map((item,index) =>{
+              return(
+                   <option key={index} value = {item.id}  > {item.name} </option>
+               )}) : true}
+           </select>
           <div>
             <h6 className = 'form-required-message'> {this.state.message} </h6>
           </div>

@@ -39,10 +39,9 @@ class Teacher extends Component {
             <th>email</th>
             <th style = {{float: 'right', marginRight: '65px'}} >options</th>
           </tr>
-        {this.props.teachers ? this.props.teachers.map((item, index) => {
-          const editInput = this.props.teachers[index];
+        {(this.props.teachers ? this.props.teachers.map((item, index) => {
             return (
-                  <tr>
+                  <tr key = {index} >
                       <td>{item.firstName}</td>
                       <td>{item.lastName}</td>
                       <td>{item.phone}</td>
@@ -58,10 +57,10 @@ class Teacher extends Component {
                       </td>
                   </tr>
             )
-        }):  <div className="loader"></div>}
-
+        }) : true)}
           </tbody>
         </table>
+        {(!this.props.teachers ?  <div className="loader"></div> : true)}
         </div>
         <Modal show={this.state.isModalOpen}>
           <p>Are you sure, that you want to delete him/her?</p>

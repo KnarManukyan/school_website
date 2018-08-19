@@ -1,5 +1,4 @@
 import { LOGGIN_FAILED } from '../actions/type.js';
-import { history } from '../history.js';
 
 const initialState = {
   message: null

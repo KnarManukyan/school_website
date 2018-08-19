@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import './home.css';
-import '../component.css';
-import pic1 from '../../assets/success.jpg'
-import pic2 from '../../assets/wellEducatedMind.jpg';
-import pic3 from '../../assets/TheAimOfEducation.jpg';
+import '../assets/css/home.css';
+import './component.css';
+import pic1 from '../assets/success.jpg'
+import pic2 from '../assets/wellEducatedMind.jpg';
+import pic3 from '../assets/TheAimOfEducation.jpg';
 
-class Admin extends Component {
+class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -25,4 +24,4 @@ class Admin extends Component {
     )
   }
 }
-export default Admin;
+export default Home;

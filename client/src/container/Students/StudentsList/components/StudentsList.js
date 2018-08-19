@@ -43,7 +43,6 @@ class Student extends Component {
             <th style = {{float: 'right', marginRight: '65px'}} >options</th>
           </tr>
         {(this.props.students ? this.props.students.map((item, index) => {
-          const editInput = this.props.students[index];
             return (
                   <tr key = {index}>
                       <td>{item.firstName}</td>
@@ -64,10 +63,10 @@ class Student extends Component {
                       </td>
                   </tr>
             )
-        }) : <div className="loader"></div>)}
-
+        }) : true)}
           </tbody>
         </table>
+        {(!this.props.students ?  <div className="loader"></div> : true)}
         </div>
         <Modal show={this.state.isModalOpen}>
           <p>Are you sure, that you want to delete him/her?</p>
