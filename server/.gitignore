@@ -8,7 +8,6 @@
 
 # production
 /build
-/config/config.json
 /.env
 
 # misc

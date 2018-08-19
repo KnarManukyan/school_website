@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getClasses, editClass, getTeachers, getFreeTeachers} from '../../../actions';
+import { getClasses, editClass, getTeachers, getFreeTeachers, resetAlertMessage } from '../../../actions';
 import  ClassForm from '../components/ClassForm.js'
 
 class EditClassContainer extends Component {
@@ -24,16 +24,20 @@ class EditClassContainer extends Component {
        }
    }
   render() {
-    for(let i = 0; i<this.props.classes.length; i++){
-      if(this.props.classes[i].id === Number(this.props.match.params.id)){
-       this.state.classRow = this.props.classes[i];
+    if(this.props.classes){
+      for(let i = 0; i<this.props.classes.length; i++){
+        if(this.props.classes[i].id === Number(this.props.match.params.id)){
+         this.state.classRow = this.props.classes[i];
+        }
       }
     }
     return (
       <div>
         <ClassForm onSubmit = {this.props.editClass}
                    classRow = {this.state.classRow}
-                   teachers = {this.props.freeTeachers}/>
+                   teachers = {this.props.freeTeachers}
+                   sweetAlertMessage = {this.props.sweetAlertMessage}
+                   resetAlertMessage = {this.props.resetAlertMessage}/>
       </div>
     )
   }
@@ -41,7 +45,8 @@ class EditClassContainer extends Component {
 const mapStateToProps = (state) => {
   return ({
     classes: state.classesReducer.classes,
-    freeTeachers: state.classesReducer.freeTeachers
+    freeTeachers: state.classesReducer.freeTeachers,
+    sweetAlertMessage: state.commonlyUsedReducer.sweetAlertMessage
   })
 }
-export default connect(mapStateToProps, {  getClasses, editClass, getTeachers, getFreeTeachers })(EditClassContainer);
+export default connect(mapStateToProps, {  getClasses, editClass, getTeachers, getFreeTeachers, resetAlertMessage })(EditClassContainer);

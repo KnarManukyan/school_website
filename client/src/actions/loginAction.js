@@ -12,7 +12,7 @@ export function setLoginFailure(message) {
 
 export function fetchUser(email, password) {
   return dispatch => {
-    dispatch(unitedFetch('POST','/login', {"email": email, "password": password}, {'Accept': 'application/json', 'Content-Type': 'application/json'}))
+    dispatch(unitedFetch('POST','login', {"email": email, "password": password}, {'Accept': 'application/json', 'Content-Type': 'application/json'}))
     .then(response => {
       if (response.code === 200) {
         if(response.token) {

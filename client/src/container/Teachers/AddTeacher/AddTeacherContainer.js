@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getTeachers, addTeacher, resetAddedId } from '../../../actions';
+import { getTeachers, addTeacher, resetAddedId, resetAlertMessage  } from '../../../actions';
 import  TeacherForm from '../components/TeacherForm.js'
 
 class AddTeacherContainer extends Component {
@@ -14,7 +14,9 @@ class AddTeacherContainer extends Component {
                      onSubmit = {this.props.addTeacher}
                      teachers = {this.props.teachers}
                      resetAddedId = {this.props.resetAddedId}
-                     addedId = {this.props.addedId}/>
+                     addedId = {this.props.addedId}
+                     sweetAlertMessage = {this.props.sweetAlertMessage}
+                     resetAlertMessage = {this.props.resetAlertMessage}/>
       </div>
     )
   }
@@ -22,7 +24,8 @@ class AddTeacherContainer extends Component {
 const mapStateToProps = (state) => {
   return ({
     teachers: state.teachersReducer.teachers,
-    addedId: state.commonlyUsedReducer.addedId
+    addedId: state.commonlyUsedReducer.addedId,
+    sweetAlertMessage: state.commonlyUsedReducer.sweetAlertMessage
   })
 }
-export default connect(mapStateToProps, {  getTeachers, addTeacher, resetAddedId })(AddTeacherContainer);
+export default connect(mapStateToProps, {  getTeachers, addTeacher, resetAddedId, resetAlertMessage  })(AddTeacherContainer);

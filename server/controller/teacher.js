@@ -44,6 +44,7 @@ exports.deleteTeacher = function(req,res) {
     });
   }).catch(function(error){
     res.send({
+      "error":error.name,
       "code":400,
       "message": "error occured while deleting teacher"
     });

@@ -118,9 +118,9 @@ exports.deleteCourse = function(req,res) {
     });
   }).catch(function(error){
     res.send({
-      "error":error,
+      "error":error.name,
       "code":400,
-      "message": "error occured while deleting this course"
+      "message": "Time overlap has occured!"
     });
   });
 }
@@ -166,7 +166,7 @@ exports.editCourse = function(req,res) {
     } else {
       res.send({
         "code": 400,
-        "messageToShow": "Time overlap has occured!"
+        "message": "Time overlap has occured!"
       })
     }
   }, 100);

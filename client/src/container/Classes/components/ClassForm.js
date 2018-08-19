@@ -3,12 +3,13 @@ import {history} from '../../../history.js';
 import '../../../assets/css/form.css'
 import { Icon } from 'react-icons-kit';
 import {close} from 'react-icons-kit/fa/close'
+import SweetAlert from '../../../components/sweetAlert.js';
 
 class ClassForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      input: (this.props.classRow ? this.props.classRow : {}),
+      input: {},
       message: ''
     }
   }
@@ -30,6 +31,9 @@ class ClassForm extends Component {
     return false;
   }
   render() {
+    if(this.props.classRow){
+      this.state.input = this.props.classRow;
+    }
     let input = this.state.input;
     return (
       <div className = 'content'>
@@ -39,8 +43,8 @@ class ClassForm extends Component {
           </button>
           <h3 style = {{margin: '15px'}} className = 'add-input-title' >{(this.props.classRow  ? `Editing class ${input.name}` : 'Add a new class')}</h3>
           <input ref = 'input1' className = 'add-edit-input' defaultValue ={input.name} placeholder="Enter name" onChange={(evt) => {input.name = evt.target.value}}/>
-          <select ref = 'input2' name="teachers" value = {this.state.input.teacherId} className = 'add-edit-input' style = {{padding: '10px 20px'}} onChange={(evt) => {this.state.input.teacherId = evt.target.value; }}>>
-          <option value='' default> Choose a teacher </option>
+          <select ref = 'input2' name="teachers" className = 'add-edit-input' style = {{padding: '10px 20px'}} onChange={(evt) => {this.state.input.teacherId = evt.target.value; }}>
+          <option value='' default> {(input.Teacher ? `${input.Teacher.firstName} ${input.Teacher.lastName}` :'Choose a teacher')} </option>
           {this.props.teachers ? this.props.teachers.map((item,index) =>{
              return(
                   <option key={index} value = {item.id}  > {item.firstName + ' ' + item.lastName} </option>
@@ -76,6 +80,9 @@ class ClassForm extends Component {
             </button>
           </div>)}
         </form>
+        {((this.props.sweetAlertMessage) ?
+          <SweetAlert type = {this.props.sweetAlertMessage[0]} handleClose={this.props.resetAlertMessage} message = {this.props.sweetAlertMessage[1]} />
+          : true)}
       </div>
     )
   }

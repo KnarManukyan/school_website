@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getClasses, addClass, resetAddedId, getTeachers, getFreeTeachers} from '../../../actions';
+import { getClasses, addClass, resetAddedId, getTeachers, getFreeTeachers, resetAlertMessage } from '../../../actions';
 import  ClassForm from '../components/ClassForm.js'
 
 class AddClassContainer extends Component {
@@ -32,7 +32,9 @@ class AddClassContainer extends Component {
                    teachers = {this.props.freeTeachers}
                    addedId = {this.props.addedId}
                    resetAddedId = {this.props.resetAddedId}
-                   getFreeTeachers = {this.props.getFreeTeachers}/>
+                   getFreeTeachers = {this.props.getFreeTeachers}
+                   sweetAlertMessage = {this.props.sweetAlertMessage}
+                   resetAlertMessage = {this.props.resetAlertMessage}/>
       </div>
     )
   }
@@ -41,7 +43,8 @@ const mapStateToProps = (state) => {
   return ({
     classes: state.classesReducer.classes,
     addedId: state.commonlyUsedReducer.addedId,
-    freeTeachers: state.classesReducer.freeTeachers
+    freeTeachers: state.classesReducer.freeTeachers,
+    sweetAlertMessage: state.commonlyUsedReducer.sweetAlertMessage
   })
 }
-export default connect(mapStateToProps, {  getClasses, addClass, resetAddedId, getTeachers, getFreeTeachers })(AddClassContainer);
+export default connect(mapStateToProps, {  getClasses, addClass, resetAddedId, getTeachers, getFreeTeachers, resetAlertMessage })(AddClassContainer);

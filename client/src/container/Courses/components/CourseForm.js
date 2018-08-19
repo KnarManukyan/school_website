@@ -3,6 +3,7 @@ import {history} from '../../../history.js';
 import '../../../assets/css/form.css'
 import { Icon } from 'react-icons-kit';
 import {close} from 'react-icons-kit/fa/close';
+import SweetAlert from '../../../components/sweetAlert.js';
 
 class CourseForm extends Component {
   constructor(props){
@@ -46,7 +47,9 @@ class CourseForm extends Component {
   render() {
     if(this.props.courseRow && Object.keys(this.state.input).length === 0){
       this.state.input = this.props.courseRow;
-      this.state.timetable = this.props.courseRow.timetable;
+      if(this.props.courseRow.timetable){
+        this.state.timetable = this.props.courseRow.timetable;
+      }
     }
     return (
       <div className = 'content'>
@@ -80,7 +83,7 @@ class CourseForm extends Component {
             <input className = 'add-edit-input' type = 'date' ref = 'input8' defaultValue = {this.state.input.endDate} onChange={(evt)=>{this.state.input.endDate = evt.target.value}} />
            </div>
            <div>
-             <button className = 'add-edit-input' style = {{padding: '5px 10px', width: '15%'}} onClick={(e) => {console.log(this.state.timetable); e.preventDefault();this.setState({timetable: [...this.state.timetable, {weekday: null, startTime: null, endTime: null}]});this.props.resetMessage();}}>
+             <button className = 'add-edit-input' style = {{padding: '5px 10px', width: '15%'}} onClick={(e) => {console.log(this.state.timetable); e.preventDefault();this.setState({timetable: [...this.state.timetable, {weekday: null, startTime: null, endTime: null}]})}}>
               Add Hour
              </button>
            </div>
@@ -99,15 +102,11 @@ class CourseForm extends Component {
                 <button className= 'add-edit-input' style = {{padding: '5px 10px', width: '15%'}} onClick={(e) => {e.preventDefault();
                                                                                                                    let a = this.state.timetable.slice(0, index);
                                                                                                                    let b = a.concat(this.state.timetable.slice(index+1))
-                                                                                                                   this.setState({timetable: b});
-                                                                                                                   this.props.resetMessage();}}>
+                                                                                                                   this.setState({timetable: b});}}>
                   Remove
                 </button>
              </div>)
            }))}
-           <div>
-             <h6 style = {{color: 'red', pardding: '10px', fontSize: '15px', padding: '10px'}}> {this.props.message} </h6>
-           </div>
            <div>
              <h6 className = 'form-required-message'> {this.state.message} </h6>
            </div>
@@ -145,6 +144,9 @@ class CourseForm extends Component {
             </button>
           </div>)}
         </form>
+        {((this.props.sweetAlertMessage) ?
+          <SweetAlert type = {this.props.sweetAlertMessage[0]} handleClose={this.props.resetAlertMessage} message = {this.props.sweetAlertMessage[1]} />
+          : true)}
       </div>
     )
   }

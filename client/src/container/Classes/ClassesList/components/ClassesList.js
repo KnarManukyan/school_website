@@ -5,12 +5,13 @@ import { Icon } from 'react-icons-kit';
 import {pencil} from 'react-icons-kit/iconic/pencil'
 import {plusCircle} from 'react-icons-kit/feather/plusCircle'
 import {minus} from 'react-icons-kit/feather/minus'
+import SweetAlert from '../../../../components/sweetAlert.js';
 
 class Class extends Component {
   constructor(props){
     super(props);
     this.state = {
-      isModalOpen: false,
+      isAlertOpen: false,
       rowToBeKilled: null
     }
   }
@@ -19,7 +20,7 @@ class Class extends Component {
   }
   handleDelete = () => {
     this.props.deleteClass(this.props.classes[this.state.rowToBeKilled].id);
-    this.setState({isModalOpen: false})
+    this.setState({isAlertOpen: false})
   }
   render() {
     return (
@@ -42,7 +43,7 @@ class Class extends Component {
                       <td>{item.name}</td>
                       <td>{(item.Teacher ? `${item.Teacher.firstName} ${item.Teacher.lastName}` : "n/a")}</td>
                       <td style = {{float: 'right', marginRight: '50px'}}>
-                          <button className= 'icon-button' style = {{marginRight: '40px'}} onClick = {() => {this.setState({isModalOpen: true,
+                          <button className= 'icon-button' style = {{marginRight: '40px'}} onClick = {() => {this.setState({isAlertOpen: true,
                                                                                               rowToBeKilled: index})}}>
                           <Icon style={{ color: 'red' }} size={25} icon={minus} />
                           </button>
@@ -58,11 +59,12 @@ class Class extends Component {
         </table>
         {(!this.props.classes ?  <div className="loader"></div> : true)}
         </div>
-        <Modal show={this.state.isModalOpen}>
-          <p>Are you sure, that you want to delete this class?</p>
-          <button className = 'modal-button' onClick = {this.handleDelete}> Yes</button>
-          <button className = 'modal-button' onClick ={()=>{this.setState({isModalOpen: false})}}> No </button>
-        </Modal>
+        {(this.state.isAlertOpen ?
+          <SweetAlert type = 'deleteWarning' handleClose={this.handleDelete} handleCancel={()=>{this.setState({isAlertOpen: false})}}/>
+          : true)}
+        {((this.props.sweetAlertMessage) ?
+        < SweetAlert type = {this.props.sweetAlertMessage[0]} message = {this.props.sweetAlertMessage[1]} handleClose = {this.props.resetAlertMessage} />
+        : true)}
     </div>
     );
   }

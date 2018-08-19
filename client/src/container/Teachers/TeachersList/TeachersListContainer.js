@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getTeachers, deleteTeacher } from '../../../actions';
+import { getTeachers, deleteTeacher, resetAlertMessage } from '../../../actions';
 import  TeachersList from './components/TeachersList.js'
 
 class TeachersListContainer extends Component {
@@ -9,14 +9,17 @@ class TeachersListContainer extends Component {
       <div>
         <TeachersList getTeachers = {this.props.getTeachers}
                       teachers = {this.props.teachers}
-                      deleteTeacher = {this.props.deleteTeacher}/>
+                      deleteTeacher = {this.props.deleteTeacher}
+                      sweetAlertMessage = {this.props.sweetAlertMessage}
+                      resetAlertMessage = {this.props.resetAlertMessage}/>
       </div>
     )
   }
 }
 const mapStateToProps = (state) => {
   return ({
-    teachers: state.teachersReducer.teachers
+    teachers: state.teachersReducer.teachers,
+    sweetAlertMessage: state.commonlyUsedReducer.sweetAlertMessage
   })
 }
-export default connect(mapStateToProps, { getTeachers, deleteTeacher })(TeachersListContainer);
+export default connect(mapStateToProps, { getTeachers, deleteTeacher, resetAlertMessage })(TeachersListContainer);

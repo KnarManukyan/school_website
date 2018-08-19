@@ -1,5 +1,5 @@
 import { SET_TEACHER_ARRAY } from './type.js';
-import {setAddedId} from './commonlyUsedActions';
+import {setAddedId, dispatchAlert} from './commonlyUsedActions';
 import {unitedFetch} from './fetch.js';
 
 export function setTeachersArray(array) {
@@ -22,6 +22,7 @@ export function deleteTeacher(id) {
   return dispatch =>
     dispatch(unitedFetch('DELETE',`/teacher/${id}`))
     .then((result) => {
+      dispatchAlert(dispatch, result);
     return dispatch(getTeachers())})
     .catch(error => { console.log('request failed', error); });
 }
@@ -36,6 +37,7 @@ export function addTeacher(teacher, goToEdit) {
       return dispatch =>
         dispatch(unitedFetch('POST',`/teacher`, body))
         .then((result) => {
+          dispatchAlert(dispatch, result);
           if(!goToEdit){
             dispatch(setAddedId(result.id));
           }
@@ -52,5 +54,8 @@ export function editTeacher(input) {
       }
       return dispatch =>
         dispatch(unitedFetch('PUT',`/teacher/${input.id}`, body))
+        .then(result=>{
+          dispatchAlert(dispatch, result);
+        })
         .catch(error => { console.log('request failed', error); });
 }

@@ -1,5 +1,5 @@
 import { SET_CLASS_ARRAY, SET_FREE_TEACHERS} from './type.js';
-import {setAddedId} from './commonlyUsedActions'
+import {setAddedId, dispatchAlert} from './commonlyUsedActions'
 import {unitedFetch} from './fetch.js'
 
 export function setClassesArray(array) {
@@ -28,6 +28,7 @@ export function deleteClass(id) {
   return dispatch =>
     dispatch(unitedFetch('DELETE',`/class/${id}`))
     .then((result) => {
+      dispatchAlert(dispatch, result);
     return dispatch(getClasses())})
     .catch(error => { console.log('request failed', error); });
 }
@@ -40,6 +41,8 @@ export function addClass(input, goToEdit) {
       return dispatch =>
         dispatch(unitedFetch('POST',`/class`, body))
         .then((result) => {
+          console.log(result);
+          dispatchAlert(dispatch, result);
           if(!goToEdit){
             dispatch(setAddedId(result.id));
           }
@@ -54,6 +57,9 @@ export function editClass(input) {
       }
       return dispatch =>
         dispatch(unitedFetch('PUT',`/class/${input.id}`, body))
+        .then(result=>{
+          dispatchAlert(dispatch, result);
+        })
         .catch(error => { console.log('request failed', error); });
 }
 

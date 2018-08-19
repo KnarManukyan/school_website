@@ -7,7 +7,7 @@ export function unitedFetch (method,url,body, headerInput) {
        'Authorization': 'Bearer ' + localStorage.user
       })
   return dispatch =>
-    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/api${url}`, {
+    fetch(`https://school--website-app.herokuapp.com/api/${url}`, {
       method: method,
       headers: headers,
       body:  JSON.stringify(body)

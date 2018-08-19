@@ -46,6 +46,7 @@ exports.deleteClass = function(req,res) {
     });
   }).catch(function(error){
     res.send({
+      "error":error.name,
       "code":400,
       "message": "error occured while deleting class"
     });
@@ -67,7 +68,7 @@ exports.editClass = function(req,res) {
     });
   }).catch(function(error){
     res.send({
-      "error": error,
+      "error": error.name,
       "code":400,
       "message": "error occured while editing class"
     });

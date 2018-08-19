@@ -3,12 +3,13 @@ import {history} from '../../../history.js';
 import '../../../assets/css/form.css'
 import { Icon } from 'react-icons-kit';
 import {close} from 'react-icons-kit/fa/close'
+import SweetAlert from '../../../components/sweetAlert.js';
 
 class StudentForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      input: (this.props.studentRow ? this.props.studentRow : {}),
+      input: {},
       message: ''
     }
   }
@@ -36,6 +37,9 @@ class StudentForm extends Component {
     return false;
   }
   render() {
+    if(this.props.studentRow){
+      this.state.input = this.props.studentRow;
+    }
     let input = this.state.input;
     return (
       <div className = 'content'>
@@ -90,6 +94,9 @@ class StudentForm extends Component {
             </button>
           </div>)}
         </form>
+        {((this.props.sweetAlertMessage) ?
+          <SweetAlert type = {this.props.sweetAlertMessage[0]} handleClose={this.props.resetAlertMessage} message = {this.props.sweetAlertMessage[1]} />
+          : true)}
       </div>
     )
   }

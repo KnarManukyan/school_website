@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { getCourses, editCourse, getClasses, getTeachers, resetMessage } from '../../../actions';
+import { getCourses, editCourse, getClasses, getTeachers, resetAlertMessage } from '../../../actions';
 import  CourseForm from '../components/CourseForm.js'
 
 class EditCourseContainer extends Component {
@@ -31,7 +31,8 @@ class EditCourseContainer extends Component {
                      teachers = {this.props.teachers}
                      message = {this.props.message}
                      courseRow = {this.state.courseRow}
-                     resetMessage = {this.props.resetMessage}/>
+                     sweetAlertMessage = {this.props.sweetAlertMessage}
+                     resetAlertMessage = {this.props.resetAlertMessage}/>
       </div>
     )
   }
@@ -41,7 +42,7 @@ const mapStateToProps = (state) => {
     courses: state.coursesReducer.courses,
     classes: state.classesReducer.classes,
     teachers: state.teachersReducer.teachers,
-    message: state.coursesReducer.errorMessage,
+    sweetAlertMessage: state.commonlyUsedReducer.sweetAlertMessage
   })
 }
-export default connect(mapStateToProps, {  getCourses, editCourse, getClasses, getTeachers, resetMessage })(EditCourseContainer);
+export default connect(mapStateToProps, {  getCourses, editCourse, getClasses, getTeachers, resetAlertMessage })(EditCourseContainer);

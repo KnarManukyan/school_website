@@ -3,12 +3,13 @@ import {history} from '../../../history.js';
 import '../../../assets/css/form.css'
 import { Icon } from 'react-icons-kit';
 import {close} from 'react-icons-kit/fa/close'
+import SweetAlert from '../../../components/sweetAlert.js';
 
 class TeacherForm extends Component {
   constructor(props){
     super(props);
     this.state = {
-      input: (this.props.teacherRow ? this.props.teacherRow : {}),
+      input: {},
       message: ''
     }
   }
@@ -30,11 +31,14 @@ class TeacherForm extends Component {
     return false;
   }
   render() {
+    if(this.props.teacherRow){
+      this.state.input = this.props.teacherRow;
+    }
     let input = this.state.input;
     return (
       <div className = 'content'>
         <form className = 'add-edit-form'>
-          <button style = {{float: 'right'}}  onClick={() => {history.push('/classes')}}>
+          <button style = {{float: 'right'}}  onClick={() => {history.push('/teachers')}}>
             <Icon style = {{color: '#626262', float: 'right'}} size={15} icon={close} />
           </button>
           <h3 style = {{margin: '15px'}} className = 'add-input-title' >{(this.props.teacherRow  ? `Editing teacher ${input.firstName} ${input.lastName}` : 'Add a new teacher')}</h3>
@@ -72,6 +76,9 @@ class TeacherForm extends Component {
             </button>
           </div>)}
         </form>
+        {((this.props.sweetAlertMessage) ?
+          <SweetAlert type = {this.props.sweetAlertMessage[0]} handleClose={this.props.resetAlertMessage} message = {this.props.sweetAlertMessage[1]} />
+          : true)}
       </div>
     )
   }

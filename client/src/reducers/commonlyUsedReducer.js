@@ -1,7 +1,8 @@
-import { SET_ADDED_ID, RESET_ADDED_ID  } from '../actions/type.js';
+import { SET_ADDED_ID, RESET_ADDED_ID, SET_SWEET_ALERT, RESET_ALERT_MESSAGE  } from '../actions/type.js';
 
 const initialState = {
-  addedId: null
+  addedId: null,
+  sweetAlertMessage: null
 };
 
 
@@ -17,6 +18,18 @@ export default function commonlyUsedActionsReducer(state = initialState, action)
       return{
         ...state,
         addedId: null
+      };
+    }
+    case  SET_SWEET_ALERT:{
+      return{
+        ...state,
+        sweetAlertMessage: [action.alertType, action.message]
+      };
+    }
+    case RESET_ALERT_MESSAGE:{
+      return{
+        ...state,
+        sweetAlertMessage: null
       };
     }
     default:
