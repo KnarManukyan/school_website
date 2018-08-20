@@ -83,7 +83,7 @@ class CourseForm extends Component {
             <input className = 'add-edit-input' type = 'date' ref = 'input8' defaultValue = {this.state.input.endDate} onChange={(evt)=>{this.state.input.endDate = evt.target.value}} />
            </div>
            <div>
-             <button className = 'add-edit-input' style = {{padding: '5px 10px', width: '15%'}} onClick={(e) => {console.log(this.state.timetable); e.preventDefault();this.setState({timetable: [...this.state.timetable, {weekday: null, startTime: null, endTime: null}]})}}>
+             <button className = 'add-edit-input' style = {{padding: '5px 10px', width: '15%'}} onClick={(e) => {e.preventDefault();this.setState({timetable: [...this.state.timetable, {weekday: null, startTime: null, endTime: null}]})}}>
               Add Hour
              </button>
            </div>
@@ -130,14 +130,13 @@ class CourseForm extends Component {
                                                               this.state.input.timetable = this.state.timetable;
                                                               if(this.validate()){
                                                                 this.props.onSubmit(this.state.input, true);
-                                                                if(this.props.message){
                                                                   this.refs.input1.value = null;
                                                                   this.refs.input2.value = null;
                                                                   this.refs.input5.value = null;
                                                                   this.refs.input6.value = null;
                                                                   this.refs.input7.value = null;
+                                                                  this.refs.input8.value = null;
                                                                   this.setState({timetable: []});
-                                                                }
                                                               }
                                                             }}>
               Add More

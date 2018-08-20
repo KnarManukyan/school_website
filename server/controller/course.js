@@ -94,10 +94,10 @@ exports.addCourse = function(req,res) {
     } else {
       res.send({
         "code": 400,
-        "messageToShow": "Time overlap has occured!"
+        "message": "Time overlap has occured!"
       })
     }
-  }, 100);
+  }, 1500);
   valid = true;
   }
 
@@ -169,6 +169,6 @@ exports.editCourse = function(req,res) {
         "message": "Time overlap has occured!"
       })
     }
-  }, 100);
+  }, 1500);
   valid = true;
   }

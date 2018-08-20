@@ -41,7 +41,6 @@ export function addClass(input, goToEdit) {
       return dispatch =>
         dispatch(unitedFetch('POST',`/class`, body))
         .then((result) => {
-          console.log(result);
           dispatchAlert(dispatch, result);
           if(!goToEdit){
             dispatch(setAddedId(result.id));

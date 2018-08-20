@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Modal from '../../../../components/modal.js';
 import {history} from '../../../../history.js';
 import { Icon } from 'react-icons-kit';
 import {pencil} from 'react-icons-kit/iconic/pencil'

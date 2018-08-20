@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Modal from '../../../../components/modal.js';
 import {history} from '../../../../history.js';
 import { Icon } from 'react-icons-kit';
 import {pencil} from 'react-icons-kit/iconic/pencil'
@@ -18,10 +17,17 @@ class Course extends Component {
   componentDidMount() {
    this.props.getCourses();
   }
+  componentDidUpdate(){
+    if(this.props.sweetAlertMessage){
+      if(this.props.sweetAlertMessage[0] === 'success'){
+        this.props.getCourses();
+        //for save and close after editing
+      }
+    }
+  }
   handleDelete = () => {
     this.props.deleteCourse(this.props.courses[this.state.rowToBeKilled].id);
     this.setState({isAlertOpen: false})
-
   }
   render() {
     return (

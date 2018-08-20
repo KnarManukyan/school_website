@@ -1,3 +1,19 @@
+.content{
+  margin-top: 10px;
+  margin-left: 75px;
+}
+
+.large-text{
+ font-family: times, Times New Roman, times-roman, georgia, serif;
+ color: #444;
+ margin: 0;
+ padding: 0px 0px 6px 0px;
+ font-size: 51px;
+ line-height: 44px;
+ letter-spacing: -2px;
+ font-weight: bold;
+ text-align: center;
+}
 table {
     margin-top: 10px;
     border-collapse: collapse;
@@ -17,11 +33,11 @@ th {
 }
 
 .header {
-  background: linear-gradient(to right, #96dae8, #53b369);
+  background: linear-gradient(to right, #53b369, #53b369);
 }
 
 input:not(.add-input) {
-  font-style: oblique;
+  font-style: oblique;z
   background: #ededeb;
   height: 20px;
 }
@@ -58,7 +74,24 @@ input:not(.add-input) {
   margin:  20px 20px 5px 20px;
 }
 
-button {
+.loader{
+  position: absolute;
+  margin-top: 12%;
+  margin-left: 43%;
+  border: 5px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid gray;
+  width: 50px;
+  height: 50px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+button:not(.icon-button) {
 	display: inline-block;
 	zoom: 1; /* zoom and *display = ie7 hack for display:inline-block */
 	*display: inline;
@@ -85,7 +118,9 @@ button:active {
 	position: relative;
 	top: 1px;
 }
-
+.add-button{
+  margin: 20px;
+}
 .edit-button, .add-button {
 	color: #606060;
 	border: solid 1px #b7b7b7;
@@ -106,7 +141,6 @@ button:active {
 	background: -moz-linear-gradient(top,  #ededed,  #fff);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
 }
-
 .delete-button {
 	color: #faddde;
 	border: solid 1px #980c10;

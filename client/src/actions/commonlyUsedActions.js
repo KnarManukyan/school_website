@@ -30,7 +30,7 @@ export function resetAlertMessage () {
 
 export function dispatchAlert(dispatch, result){
   if(result.error === 'SequelizeForeignKeyConstraintError'){
-    dispatch(setSweetAlert('danger', "The data you want to delete is connected with other tables! Please, edit other tables first."))
+    dispatch(setSweetAlert('danger', "The data you want to delete is connected to other tables! Please, edit them first."))
   } else if(result.code === 200){
     dispatch(setSweetAlert('success', result.message))
   } else {
